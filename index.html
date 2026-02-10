@@ -244,9 +244,6 @@ nav a:hover {
 .panel-item:hover .panel-item-icon {
   background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
   transform: scale(1.1) rotate(5deg);
-}
-
-.panel-item:hover .panel-item-icon {
   filter: brightness(0) invert(1);
 }
 
@@ -341,6 +338,170 @@ section {
   color: #0b2c4d;
   font-weight: bold;
   font-size: 18px;
+}
+
+/* PÁGINAS DE SERVIÇOS DETALHADAS */
+.service-detail {
+  display: none;
+}
+
+.service-detail.active {
+  display: block;
+}
+
+.service-hero {
+  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
+  color: #fff;
+  padding: 60px 40px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.service-hero h2 {
+  font-size: 42px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.service-hero .service-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.service-hero p {
+  font-size: 20px;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #e0e7ff;
+}
+
+.service-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.service-image {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.service-info h3 {
+  color: #0b2c4d;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.service-info p {
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.service-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background: #fff;
+  padding: 28px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: #0b2c4d;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(11, 44, 77, 0.1);
+}
+
+.feature-card h4 {
+  color: #0b2c4d;
+  font-size: 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature-card h4::before {
+  content: '●';
+  color: #0b2c4d;
+  font-size: 24px;
+}
+
+.feature-card p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta-section h3 {
+  color: #0b2c4d;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  color: #475569;
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 44, 77, 0.4);
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0b2c4d;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid #0b2c4d;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.back-button:hover {
+  background: #0b2c4d;
+  color: #fff;
 }
 
 /* VALORES SECTION */
@@ -868,6 +1029,18 @@ textarea {
   .carousel-btn:nth-child(2) {
     right: 15px;
   }
+
+  .service-content {
+    grid-template-columns: 1fr;
+  }
+
+  .service-hero h2 {
+    font-size: 32px;
+  }
+
+  .service-features {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Animações suaves para transições de página */
@@ -907,37 +1080,37 @@ section[style*="display: block"] {
         <div class="dropdown-panel" aria-labelledby="dropServ">
           <div class="panel-tabs">
             <button class="panel-tab active" onclick="switchTab(this, 'vendas')">
-              <span>Vendas</span>
+              <span>💎 Vendas</span>
             </button>
             <button class="panel-tab" onclick="switchTab(this, 'servicos')">
-              <span> Serviços</span>
+              <span>🤝 Serviços</span>
             </button>
           </div>
 
           <div class="panel-pane active" id="pane-vendas">
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('diamantes'); return false;">
+              <div class="panel-item-icon">💎</div>
               <div class="panel-item-content">
                 <h4>Diamantes Naturais</h4>
                 <p>Intermediação de diamantes certificados</p>
               </div>
             </a>
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('suplementos'); return false;">
+              <div class="panel-item-icon">🧬</div>
               <div class="panel-item-content">
                 <h4>Suplementos Epigenéticos</h4>
                 <p>Produtos para saúde e bem-estar</p>
               </div>
             </a>
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('cursos'); return false;">
+              <div class="panel-item-icon">📚</div>
               <div class="panel-item-content">
                 <h4>Cursos & Formações</h4>
                 <p>Capacitação profissional especializada</p>
               </div>
             </a>
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('pacotes'); return false;">
+              <div class="panel-item-icon">🎁</div>
               <div class="panel-item-content">
                 <h4>Pacotes Sociais</h4>
                 <p>Soluções para projetos comunitários</p>
@@ -946,29 +1119,29 @@ section[style*="display: block"] {
           </div>
 
           <div class="panel-pane" id="pane-servicos">
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('intermediacao'); return false;">
+              <div class="panel-item-icon">🔗</div>
               <div class="panel-item-content">
                 <h4>Intermediação</h4>
                 <p>Conexão entre parceiros de negócio</p>
               </div>
             </a>
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('consultasaude'); return false;">
+              <div class="panel-item-icon">⚕️</div>
               <div class="panel-item-content">
                 <h4>Consulta de Saúde</h4>
                 <p>Orientação em saúde epigenética</p>
               </div>
             </a>
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('capacitacao'); return false;">
+              <div class="panel-item-icon">🎓</div>
               <div class="panel-item-content">
                 <h4>Capacitação Profissional</h4>
                 <p>Programas de desenvolvimento</p>
               </div>
             </a>
-            <a class="panel-item" href="#" onclick="showContent('servicos'); return false;">
-              <div class="panel-item-icon"></div>
+            <a class="panel-item" href="#" onclick="showService('projetos'); return false;">
+              <div class="panel-item-icon">🤲</div>
               <div class="panel-item-content">
                 <h4>Projetos Sociais</h4>
                 <p>Iniciativas de impacto comunitário</p>
@@ -999,6 +1172,7 @@ section[style*="display: block"] {
 
 <div class="container">
 
+<!-- HOME -->
 <section id="home">
   <div class="card">
     <h2>Bem-vindo à ASAP TP</h2>
@@ -1010,6 +1184,7 @@ section[style*="display: block"] {
   </div>
 </section>
 
+<!-- SOBRE -->
 <section id="sobre" style="display:none;">
   <div class="card">
     <h2>Sobre Nós</h2>
@@ -1061,19 +1236,391 @@ section[style*="display: block"] {
   </section>
 </section>
 
-<section id="servicos" style="display:none;">
-  <div class="card">
-    <h2>Nossos Serviços</h2>
-    <p style="margin-bottom: 24px;">Oferecemos uma ampla gama de serviços especializados:</p>
-    <ul>
-      <li>Intermediação de Diamantes Naturais</li>
-      <li>Saúde Epigenética e Suplementos</li>
-      <li>Educação & Capacitação Profissional</li>
-      <li>Desenvolvimento de Projetos Sociais</li>
-    </ul>
+<!-- PÁGINA: DIAMANTES NATURAIS -->
+<section id="service-diamantes" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">💎</span>
+    <h2>Diamantes Naturais</h2>
+    <p>Intermediação de diamantes certificados com total transparência e qualidade</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="diamante.jfif" alt="Diamantes Naturais" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Serviço</h3>
+      <p>Somos especializados na intermediação de diamantes naturais certificados, conectando produtores angolanos a compradores internacionais com total segurança e conformidade legal.</p>
+      <p>Trabalhamos apenas com diamantes certificados pelo Processo Kimberley, garantindo origem ética e procedência legal de todas as pedras comercializadas.</p>
+      <p>Nossa expertise no mercado de diamantes angolano permite oferecer as melhores oportunidades de negócio, sempre com transparência e profissionalismo.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Certificação</h4>
+      <p>Todos os diamantes são certificados pelo Processo Kimberley, garantindo autenticidade e origem ética.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Transparência</h4>
+      <p>Documentação completa e rastreabilidade em todas as transações comerciais.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Rede Global</h4>
+      <p>Conexões com compradores e investidores em mercados internacionais.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Assessoria Completa</h4>
+      <p>Suporte em todas as etapas do processo de comercialização.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Interessado em Diamantes Naturais?</h3>
+    <p>Entre em contacto connosco para mais informações sobre oportunidades de negócio</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Contacte-nos</a>
   </div>
 </section>
 
+<!-- PÁGINA: SUPLEMENTOS EPIGENÉTICOS -->
+<section id="service-suplementos" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">🧬</span>
+    <h2>Suplementos Epigenéticos</h2>
+    <p>Produtos inovadores para saúde, bem-estar e longevidade</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="suplementos.jpg" alt="Suplementos Epigenéticos" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Produto</h3>
+      <p>Oferecemos uma linha exclusiva de suplementos epigenéticos baseados em ciência de ponta, desenvolvidos para otimizar a saúde celular e promover o bem-estar integral.</p>
+      <p>A epigenética representa a nova fronteira da saúde preventiva, permitindo influenciar positivamente a expressão dos nossos genes através de nutrição direcionada.</p>
+      <p>Nossos produtos são rigorosamente testados e formulados com ingredientes de alta qualidade, seguindo os mais elevados padrões internacionais.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Ciência Avançada</h4>
+      <p>Fórmulas baseadas em pesquisas epigenéticas de última geração.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Qualidade Premium</h4>
+      <p>Ingredientes selecionados e testados seguindo padrões internacionais.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Resultados Comprováveis</h4>
+      <p>Produtos com eficácia validada por estudos científicos.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Orientação Personalizada</h4>
+      <p>Suporte profissional para escolha dos produtos adequados.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Invista na Sua Saúde</h3>
+    <p>Descubra como os suplementos epigenéticos podem transformar seu bem-estar</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Saiba Mais</a>
+  </div>
+</section>
+
+<!-- PÁGINA: CURSOS & FORMAÇÕES -->
+<section id="service-cursos" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">📚</span>
+    <h2>Cursos & Formações</h2>
+    <p>Capacitação profissional de excelência para o mercado angolano</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="educacao.jfif" alt="Cursos e Formações" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Programa</h3>
+      <p>Desenvolvemos programas de formação profissional adaptados às necessidades do mercado angolano, focados em áreas estratégicas de desenvolvimento.</p>
+      <p>Nossos cursos combinam teoria e prática, ministrados por profissionais experientes e reconhecidos nas suas áreas de atuação.</p>
+      <p>Oferecemos formações em diversas áreas: gestão empresarial, tecnologia, saúde, empreendedorismo e desenvolvimento pessoal.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Instrutores Qualificados</h4>
+      <p>Professores com experiência prática e reconhecimento profissional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Certificação</h4>
+      <p>Certificados reconhecidos que valorizam seu currículo profissional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Metodologia Prática</h4>
+      <p>Aprendizagem baseada em casos reais e aplicações práticas.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Flexibilidade</h4>
+      <p>Opções presenciais e online para atender diferentes necessidades.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Invista no Seu Futuro</h3>
+    <p>Descubra nossos programas de formação e dê o próximo passo na sua carreira</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Inscreva-se</a>
+  </div>
+</section>
+
+<!-- PÁGINA: PACOTES SOCIAIS -->
+<section id="service-pacotes" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">🎁</span>
+    <h2>Pacotes Sociais</h2>
+    <p>Soluções integradas para projetos comunitários e de responsabilidade social</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="social.jpg" alt="Pacotes Sociais" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre a Iniciativa</h3>
+      <p>Desenvolvemos pacotes personalizados para empresas e organizações que desejam implementar projetos de responsabilidade social com impacto real nas comunidades.</p>
+      <p>Nossos pacotes incluem materiais educativos, kits de saúde, programas de formação comunitária e muito mais, sempre focados em gerar transformação sustentável.</p>
+      <p>Trabalhamos em parceria com ONGs locais e internacionais para maximizar o impacto social dos projetos.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Personalização</h4>
+      <p>Pacotes adaptados aos objetivos específicos de cada organização.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Impacto Mensurável</h4>
+      <p>Relatórios detalhados sobre o impacto social gerado.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Gestão Completa</h4>
+      <p>Coordenamos todas as etapas do projeto social.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Parcerias Estratégicas</h4>
+      <p>Rede estabelecida com organizações sociais de confiança.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Faça a Diferença</h3>
+    <p>Desenvolva projetos sociais de impacto com nossa assessoria especializada</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Contacte-nos</a>
+  </div>
+</section>
+
+<!-- PÁGINA: INTERMEDIAÇÃO -->
+<section id="service-intermediacao" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">🔗</span>
+    <h2>Intermediação</h2>
+    <p>Conexão estratégica entre parceiros de negócio</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="negocios.jpg" alt="Intermediação de Negócios" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Serviço</h3>
+      <p>Facilitamos conexões estratégicas entre empresas, investidores e oportunidades de negócio em Angola e internacionalmente.</p>
+      <p>Com vasta experiência no mercado angolano e rede de contactos global, identificamos as melhores oportunidades e parceiros para cada projeto.</p>
+      <p>Atuamos em diversos setores: mineração, saúde, educação, tecnologia, infraestrutura e muito mais.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Rede Global</h4>
+      <p>Contactos estratégicos em Angola e mercados internacionais.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Due Diligence</h4>
+      <p>Análise criteriosa de oportunidades e parceiros de negócio.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Negociação</h4>
+      <p>Suporte completo em processos de negociação comercial.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Confidencialidade</h4>
+      <p>Total discrição e sigilo em todas as operações.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Expanda Seus Negócios</h3>
+    <p>Conecte-se a oportunidades estratégicas com nossa intermediação</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Fale Connosco</a>
+  </div>
+</section>
+
+<!-- PÁGINA: CONSULTA DE SAÚDE -->
+<section id="service-consultasaude" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">⚕️</span>
+    <h2>Consulta de Saúde</h2>
+    <p>Orientação especializada em saúde epigenética e bem-estar</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="saude.jpg" alt="Consulta de Saúde" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Serviço</h3>
+      <p>Oferecemos consultas personalizadas de saúde com foco em abordagem epigenética, nutrição funcional e medicina preventiva.</p>
+      <p>Nossos profissionais avaliam seu perfil de saúde de forma holística, considerando fatores genéticos, estilo de vida e ambiente.</p>
+      <p>Desenvolvemos planos personalizados de saúde e bem-estar baseados em evidências científicas e adaptados à sua realidade.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Avaliação Completa</h4>
+      <p>Análise detalhada do seu estado de saúde e fatores de risco.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Plano Personalizado</h4>
+      <p>Estratégias individualizadas de saúde e prevenção.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Acompanhamento</h4>
+      <p>Monitorização contínua da evolução da sua saúde.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Abordagem Integrativa</h4>
+      <p>Combinação de medicina convencional e terapias complementares.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Cuide da Sua Saúde</h3>
+    <p>Agende uma consulta e inicie sua jornada rumo ao bem-estar integral</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Agendar Consulta</a>
+  </div>
+</section>
+
+<!-- PÁGINA: CAPACITAÇÃO PROFISSIONAL -->
+<section id="service-capacitacao" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">🎓</span>
+    <h2>Capacitação Profissional</h2>
+    <p>Programas de desenvolvimento para impulsionar sua carreira</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="livros.jfif" alt="Capacitação Profissional" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Programa</h3>
+      <p>Desenvolvemos programas customizados de capacitação profissional para empresas e indivíduos, focados em desenvolver competências essenciais para o mercado atual.</p>
+      <p>Nossos programas abrangem liderança, gestão de projetos, comunicação, tecnologia, vendas e outras competências estratégicas.</p>
+      <p>Utilizamos metodologias ativas de aprendizagem que garantem a aplicação prática dos conhecimentos adquiridos.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Programas In-Company</h4>
+      <p>Treinamentos desenvolvidos especificamente para sua empresa.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Mentoria Individual</h4>
+      <p>Acompanhamento personalizado no desenvolvimento profissional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Workshops Práticos</h4>
+      <p>Sessões intensivas focadas em resolução de problemas reais.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Networking</h4>
+      <p>Conexão com outros profissionais e oportunidades de carreira.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Desenvolva Seu Potencial</h3>
+    <p>Participe dos nossos programas de capacitação e destaque-se no mercado</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Participar</a>
+  </div>
+</section>
+
+<!-- PÁGINA: PROJETOS SOCIAIS -->
+<section id="service-projetos" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon">🤲</span>
+    <h2>Projetos Sociais</h2>
+    <p>Iniciativas de impacto comunitário e transformação social</p>
+  </div>
+
+  <div class="service-content">
+    <div>
+      <img src="projeto-social.jpg" alt="Projetos Sociais" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre a Iniciativa</h3>
+      <p>Desenvolvemos e gerimos projetos sociais focados em educação, saúde, empregabilidade e desenvolvimento comunitário em Angola.</p>
+      <p>Trabalhamos em parceria com comunidades locais, identificando necessidades reais e desenvolvendo soluções sustentáveis e de longo prazo.</p>
+      <p>Nossos projetos já impactaram milhares de vidas através de ações concretas em educação, formação profissional e apoio comunitário.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Educação Comunitária</h4>
+      <p>Programas de alfabetização e educação básica.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Saúde Preventiva</h4>
+      <p>Campanhas de conscientização e acesso a cuidados básicos.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Empregabilidade</h4>
+      <p>Formação profissional para inserção no mercado de trabalho.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Sustentabilidade</h4>
+      <p>Projetos de geração de renda e autonomia comunitária.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Participe da Mudança</h3>
+    <p>Junte-se a nós na construção de um futuro melhor para Angola</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Colabore</a>
+  </div>
+</section>
+
+<!-- CONTACTOS -->
 <section id="contactos" style="display:none;">
   <div class="section-header centered">
     <span class="section-badge">Contactos</span>
@@ -1212,7 +1759,7 @@ document.addEventListener("click", function(e) {
   }
 });
 
-/* Função para mostrar conteúdo conforme item do menu é clicado */
+/* Função para mostrar conteúdo */
 function showContent(sectionId) {
   // Esconder todas as seções
   document.querySelectorAll('.container > section').forEach(section => {
@@ -1221,12 +1768,34 @@ function showContent(sectionId) {
 
   // Mostrar a seção específica
   const targetSection = document.getElementById(sectionId);
-  targetSection.style.display = 'block';
+  if (targetSection) {
+    targetSection.style.display = 'block';
+  }
   
   // Fechar dropdown se estiver aberto
   document.getElementById("dropServ").classList.remove("open");
   
   // Scroll suave para o topo do conteúdo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* Função para mostrar páginas de serviços */
+function showService(serviceId) {
+  // Esconder todas as seções
+  document.querySelectorAll('.container > section').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  // Mostrar a página do serviço específico
+  const serviceSection = document.getElementById('service-' + serviceId);
+  if (serviceSection) {
+    serviceSection.style.display = 'block';
+  }
+  
+  // Fechar dropdown
+  document.getElementById("dropServ").classList.remove("open");
+  
+  // Scroll para o topo
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
