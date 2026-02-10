@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>ASAP TP – Projetos, Comércio e Serviços</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ASAP TP – Projetos, Comércio e Serviços">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(11, 44, 77, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, #fff, #e0e7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+header img {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+header img:hover {
+  transform: scale(1.05);
+}
+
+/* MENU */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+nav li {
+  position: relative;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* DROPDOWN */
+.dropdown-panel {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 340px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  display: none;
+  overflow: hidden;
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown.open .dropdown-panel {
+  display: block;
+}
+
+/* TABS */
+.panel-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  gap: 4px;
+}
+
+.panel-tab {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-weight: 600;
+  font-size: 14px;
+  color: #64748b;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.panel-tab:hover {
+  background: #e2e8f0;
+  color: #0b2c4d;
+}
+
+.panel-tab.active {
+  background: #0b2c4d;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(11, 44, 77, 0.2);
+}
+
+/* CONTENT */
+.panel-pane {
+  display: none;
+  padding: 12px;
+}
+
+.panel-pane.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.panel-item {
+  display: block;
+  padding: 14px 16px;
+  color: #0f172a;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.panel-item:hover {
+  background: #f1f5f9;
+  border-left-color: #0b2c4d;
+  padding-left: 20px;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 24px;
+  margin-top: 50vh;
+}
+
+section {
+  margin-bottom: 48px;
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  background: #fff;
+  padding: 36px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.card h2 {
+  color: #0b2c4d;
+  font-size: 28px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.card h3 {
+  color: #0b2c4d;
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.card p {
+  color: #475569;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.card ul li {
+  padding: 12px 0;
+  padding-left: 28px;
+  position: relative;
+  color: #475569;
+  font-size: 16px;
+}
+
+.card ul li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #0b2c4d;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* FOOTER */
+footer {
+  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
+  color: #e0e7ff;
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 3px solid #2d4a6d;
+}
+
+footer p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+footer strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* HERO CAROUSEL */
+.hero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75vh;
+  z-index: -1;
+}
+
+.carousel {
+  width: 100%;
+  height: 60%;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(11, 44, 77, 0.7) 0%, rgba(30, 58, 95, 0.5) 100%);
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  padding: 40px;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.hero-overlay h2 {
+  font-size: 48px;
+  margin-bottom: 16px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.hero-overlay p {
+  font-size: 22px;
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0.95;
+}
+
+/* Carousel Button */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:nth-child(1) {
+  left: 30px;
+}
+
+.carousel-btn:nth-child(2) {
+  right: 30px;
+}
+
+/* Estilo geral para a seção de Contactos */
+#contactos {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-badge {
+  display: inline-block;
+  background: #e0e7ff;
+  color: #0b2c4d;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  font-size: 42px;
+  color: #0b2c4d;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.section-subtitle {
+  font-size: 20px;
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Container de informações de contato */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+}
+
+/* Informações de contato */
+.contact-info {
+  background: #fff;
+  padding: 36px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  height: fit-content;
+}
+
+.contact-info h3 {
+  color: #0b2c4d;
+  font-size: 24px;
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+
+.contact-info address {
+  font-style: normal;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  background: #f8fafc;
+}
+
+.contact-item .contact-icon {
+  font-size: 28px;
+  margin-right: 16px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.contact-item div {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.contact-item strong {
+  font-weight: 700;
+  color: #0b2c4d;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.contact-item p {
+  color: #475569;
+  margin: 0;
+  font-size: 15px;
+}
+
+.contact-item a {
+  color: #0b2c4d;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: #1e3a5f;
+  text-decoration: underline;
+}
+
+/* Estilo para o formulário */
+.card form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Estilo para os campos do formulário */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 12px;
+}
+
+input, select, textarea {
+  padding: 14px 16px;
+  font-size: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  width: 100%;
+  background-color: #f8fafc;
+  color: #1e293b;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #0b2c4d;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(11, 44, 77, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Botão de envio */
+.submit-btn {
+  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 44, 77, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+
+  header h1 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  nav li {
+    width: 100%;
+  }
+
+  nav a {
+    text-align: center;
+  }
+
+  .hero {
+    height: 60vh;
+  }
+
+  .hero-overlay h2 {
+    font-size: 32px;
+  }
+
+  .hero-overlay p {
+    font-size: 16px;
+    max-width: 90%;
+  }
+
+  .container {
+    padding: 40px 16px;
+    margin-top: 40vh;
+  }
+
+  .dropdown-panel {
+    width: 100%;
+    left: 0;
+  }
+
+  .panel-tabs {
+    flex-direction: row;
+  }
+
+  .panel-tab {
+    padding: 12px;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .section-header h2 {
+    font-size: 32px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .carousel-btn:nth-child(1) {
+    left: 15px;
+  }
+
+  .carousel-btn:nth-child(2) {
+    right: 15px;
+  }
+}
+
+/* Animações suaves para transições de página */
+section {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+section[style*="display: none"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+section[style*="display: block"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <img src="Img/logo.jfif" alt="Logo ASAP TP" loading="lazy">
+    <h1>ASAP TP – Projetos, Comércio e Serviços</h1>
+  </div>
+
+  <nav aria-label="Menu principal">
+    <ul>
+      <li><a href="#" onclick="showContent('home')" aria-label="Ir para a página inicial">Início</a></li>
+      <li><a href="#" onclick="showContent('sobre')" aria-label="Sobre nós">Sobre Nós</a></li>
+
+      <!-- DROPDOWN SERVIÇOS -->
+      <li class="dropdown" id="dropServ" aria-haspopup="true" aria-expanded="false">
+        <a href="#" onclick="event.preventDefault(); toggleDrop();" aria-label="Serviços">Serviços ▾</a>
+
+        <div class="dropdown-panel" aria-labelledby="dropServ">
+          <div class="panel-tabs">
+            <button class="panel-tab active" onclick="switchTab(this, 'vendas')">Vendas</button>
+            <button class="panel-tab" onclick="switchTab(this, 'servicos')">Serviços</button>
+          </div>
+
+          <div class="panel-pane active" id="pane-vendas">
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Diamantes Naturais</a>
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Suplementos Epigenéticos</a>
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Cursos & Formações</a>
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Pacotes Sociais</a>
+          </div>
+
+          <div class="panel-pane" id="pane-servicos">
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Intermediação</a>
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Consulta de Saúde</a>
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Capacitação Profissional</a>
+            <a class="panel-item" href="#servicos" onclick="showContent('servicos')">Projetos Sociais</a>
+          </div>
+        </div>
+      </li>
+
+      <li><a href="#" onclick="showContent('contactos')" aria-label="Página de contatos">Contactos</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO / CARROSSEL -->
+<section class="hero">
+  <div class="carousel" id="carousel">
+    <div class="slide active" style="background-image:url('Img/educacao.jfif')" loading="lazy"></div>
+    <div class="slide" style="background-image:url('Img/diamante.jfif')" loading="lazy"></div>
+    <div class="slide" style="background-image:url('Img/livros.jfif')" loading="lazy"></div>
+  </div>
+
+  
+</section>
+
+<div class="container">
+
+<section id="home">
+  <div class="card">
+    <h2>Bem-vindo à ASAP TP</h2>
+    <p>
+      A <strong>ASAP TP</strong> é uma empresa angolana multidisciplinar focada
+      em comércio, serviços, saúde, educação e projetos sociais. Trabalhamos com dedicação para promover
+      o desenvolvimento sustentável e o bem-estar da comunidade angolana.
+    </p>
+  </div>
+</section>
+
+<section id="sobre" style="display:none;">
+  <div class="card">
+    <h2>Sobre Nós</h2>
+    <p>
+      A ASAP TP nasceu com o compromisso de contribuir ativamente para o desenvolvimento de Angola.
+      Atuamos com ética, transparência e impacto social positivo em diversas áreas, sempre priorizando
+      a qualidade dos nossos serviços e a satisfação dos nossos clientes.
+    </p>
+    <br>
+    <p>
+      Nossa missão é criar valor sustentável através de soluções inovadoras que beneficiem tanto
+      nossos parceiros comerciais quanto a sociedade angolana como um todo.
+    </p>
+  </div>
+  <!-- VISÃO MISSÃO VALORES -->
+<section class="vmv-section">
+  <div class="section-header centered">
+    <span class="section-badge">Nossa Filosofia</span>
+    <h2>Visão, Missão e Valores</h2>
+    <p class="section-subtitle">Os princípios que nos guiam em cada projeto</p>
+  </div>
+  
+  <div class="values">
+    <article class="card vmv-card">
+      <div class="card-icon"></div>
+      <h3>Visão</h3>
+      <p>Ser referência internacional em soluções estratégicas e impacto social sustentável, reconhecida pela excelência, inovação e contribuição para o desenvolvimento de Angola e além.</p>
+    </article>
+    
+    <article class="card vmv-card">
+      <div class="card-icon"></div>
+      <h3>Missão</h3>
+      <p>Conectar oportunidades de negócio a projetos de desenvolvimento humano através de soluções inovadoras, transparentes e sustentáveis que criam valor partilhado para todas as partes interessadas.</p>
+    </article>
+    
+    <article class="card vmv-card">
+      <div class="card-icon"></div>
+      <h3>Valores</h3>
+      <ul class="values-list">
+        <li><strong>Ética:</strong> Integridade em todas as ações</li>
+        <li><strong>Confiança:</strong> Transparência total</li>
+        <li><strong>Sustentabilidade:</strong> Responsabilidade ambiental</li>
+        <li><strong>Inovação:</strong> Soluções criativas</li>
+        <li><strong>Impacto Social:</strong> Transformação positiva</li>
+      </ul>
+    </article>
+  </div>
+</section>
+</section>
+
+<section id="servicos" style="display:none;">
+  <div class="card">
+    <h2>Nossos Serviços</h2>
+    <p style="margin-bottom: 24px;">Oferecemos uma ampla gama de serviços especializados:</p>
+    <ul>
+      <li>Intermediação de Diamantes Naturais</li>
+      <li>Saúde Epigenética e Suplementos</li>
+      <li>Educação & Capacitação Profissional</li>
+      <li>Desenvolvimento de Projetos Sociais</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contactos" style="display:none;">
+  <div class="section-header centered">
+    <span class="section-badge">Contactos</span>
+    <h2>Entre em Contacto</h2>
+    <p class="section-subtitle">Estamos prontos para ajudar</p>
+  </div>
+  
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Informações de Contacto</h3>
+      <address>
+        <div class="contact-item">
+          <span class="contact-icon"><img src="Img/empresa.png" alt=""></span>
+          <div>
+            <strong>Empresa</strong>
+            <p>ASAP TP – Projetos, Comércios e Serviços</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon"><img src="Img/nif.png" alt=""></span>
+          <div>
+            <strong>NIF</strong>
+            <p>5002197618</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon"><img src="Img/email.png" alt=""></span>
+          <div>
+            <strong>Email</strong>
+            <p><a href="mailto:info@asaptp.ao">geral@asap-ao.com</a></p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon"><img src="Img/tele.png" alt=""></span>
+          <div>
+            <strong>Telefone/WhatsApp</strong>
+            <p><a href="tel:+244929952190">+244 929 952 190</a></p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon"><img src="Img/loca.png" alt=""></span>
+          <div>
+            <strong>Localização</strong>
+            <p>Cuíto, Centralidae Belo Horizonte Guantra:44 Predio:24 App:1.1</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon"><img src="Img/horario.png" alt=""></span>
+          <div>
+            <strong>Horário de Atendimento</strong>
+            <p>Segunda a Sexta: 8h00 - 17h00<br>Sábado: 8h00 - 13h00</p>
+          </div>
+        </div>
+      </address>
+    </div>
+    <div class="card">
+      <h3>Envie-nos uma Mensagem</h3>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Nome Completo *</label>
+          <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+244 900 000 000">
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Assunto *</label>
+          <select id="subject" name="subject" required>
+            <option value="">Selecione um assunto</option>
+            <option value="diamantes">Intermediação de Diamantes</option>
+            <option value="saude">Saúde Epigenética</option>
+            <option value="cursos">Cursos e Formação</option>
+            <option value="social">Projetos Sociais</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Mensagem *</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Escreva sua mensagem aqui..."></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Enviar Mensagem</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p><strong>ASAP TP – Projetos, Comércio e Serviços</strong></p>
+  <p>© 2026 Todos os direitos reservados</p>
+</footer>
+
+<script>
+function toggleDrop() {
+  const dropServ = document.getElementById("dropServ");
+  dropServ.classList.toggle("open");
+  dropServ.setAttribute("aria-expanded", dropServ.classList.contains("open"));
+}
+
+function switchTab(btn, tab) {
+  document.querySelectorAll(".panel-tab").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  document.querySelectorAll(".panel-pane").forEach(p => p.classList.remove("active"));
+  document.getElementById("pane-" + tab).classList.add("active");
+}
+
+document.addEventListener("click", function(e) {
+  const dropServ = document.getElementById("dropServ");
+  if (!dropServ.contains(e.target)) {
+    dropServ.classList.remove("open");
+    dropServ.setAttribute("aria-expanded", "false");
+  }
+});
+
+/* Função para mostrar conteúdo conforme item do menu é clicado */
+function showContent(sectionId) {
+  // Esconder todas as seções
+  document.querySelectorAll('.container > section').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  // Mostrar a seção específica
+  const targetSection = document.getElementById(sectionId);
+  targetSection.style.display = 'block';
+  
+  // Fechar dropdown se estiver aberto
+  document.getElementById("dropServ").classList.remove("open");
+  
+  // Scroll suave para o topo do conteúdo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* CAROUSEL */
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+let slideInterval;
+
+function showSlide(index) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[index].classList.add('active');
+}
+
+function startCarousel() {
+  slideInterval = setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 5000);
+}
+
+function stopCarousel() {
+  clearInterval(slideInterval);
+}
+
+// Iniciar carrossel
+startCarousel();
+
+// Adicionar navegação de botões
+const prevBtn = document.createElement('button');
+const nextBtn = document.createElement('button');
+prevBtn.innerHTML = '◁';
+nextBtn.innerHTML = '▷';
+prevBtn.setAttribute('aria-label', 'Slide anterior');
+nextBtn.setAttribute('aria-label', 'Próximo slide');
+
+prevBtn.classList.add('carousel-btn');
+nextBtn.classList.add('carousel-btn');
+
+document.querySelector('.hero').append(prevBtn, nextBtn);
+
+prevBtn.addEventListener('click', () => {
+  stopCarousel();
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+  startCarousel();
+});
+
+nextBtn.addEventListener('click', () => {
+  stopCarousel();
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+  startCarousel();
+});
+
+// Pausar carrossel quando mouse está sobre ele
+document.querySelector('.hero').addEventListener('mouseenter', stopCarousel);
+document.querySelector('.hero').addEventListener('mouseleave', startCarousel);
+
+// Formulário de contato
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Aqui você pode adicionar a lógica de envio do formulário
+  alert('Mensagem enviada com sucesso! Entraremos em contacto em breve.');
+  this.reset();
+});
+</script>
+
+</body>
+</html>
