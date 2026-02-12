@@ -552,7 +552,7 @@ section {
 }
 
 .card-icon::before {
-  content: '●';
+  content: '';
   font-size: 20px;
 }
 
@@ -1110,11 +1110,17 @@ section[style*="display: block"] {
             <a class="panel-item" href="#" onclick="showService('suplementos'); return false;">
               <div class="panel-item-icon"></div>
               <div class="panel-item-content">
-                <h4>Epigenéticos</h4>
+                <h4>Suplementos Epigenéticos</h4>
                 <p>Produtos para saúde e bem-estar</p>
               </div>
             </a>
-            
+            <a class="panel-item" href="#" onclick="showService('cursos'); return false;">
+              <div class="panel-item-icon"></div>
+              <div class="panel-item-content">
+                <h4>Cursos & Formações</h4>
+                <p>Capacitação profissional especializada</p>
+              </div>
+            </a>
             <a class="panel-item" href="#" onclick="showService('pacotes'); return false;">
               <div class="panel-item-icon"></div>
               <div class="panel-item-content">
@@ -1139,7 +1145,13 @@ section[style*="display: block"] {
                 <p>Orientação em saúde epigenética</p>
               </div>
             </a>
-          
+            <a class="panel-item" href="#" onclick="showService('capacitacao'); return false;">
+              <div class="panel-item-icon"></div>
+              <div class="panel-item-content">
+                <h4>Capacitação Profissional</h4>
+                <p>Programas de desenvolvimento</p>
+              </div>
+            </a>
             <a class="panel-item" href="#" onclick="showService('projetos'); return false;">
               <div class="panel-item-icon"></div>
               <div class="panel-item-content">
@@ -1162,6 +1174,7 @@ section[style*="display: block"] {
     <div class="slide active" style="background-image:url('educacao.jfif')" loading="lazy"></div>
     <div class="slide" style="background-image:url('caro1.jfif')" loading="lazy"></div>
     <div class="slide" style="background-image:url('livros.jfif')" loading="lazy"></div>
+     <div class="slide" style="background-image:url('diamante.jfif')" loading="lazy"></div>
       <div class="slide" style="background-image:url('logo.jfif')" loading="lazy"></div>
   </div>
 
@@ -1242,7 +1255,7 @@ section[style*="display: block"] {
   <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
   
   <div class="service-hero">
-    <span class="service-icon"></span>
+    <span class="service-icon">💎</span>
     <h2>Diamantes Naturais</h2>
     <p>Intermediação de diamantes certificados com total transparência e qualidade</p>
   </div>
@@ -1291,17 +1304,17 @@ section[style*="display: block"] {
   
   <div class="service-hero">
     <span class="service-icon"></span>
-    <h2>Epigenéticos</h2>
+    <h2>Suplementos Epigenéticos</h2>
     <p>Produtos inovadores para saúde, bem-estar e longevidade</p>
   </div>
 
   <div class="service-content">
     <div>
-      <img src="epi.webp" alt="Suplementos Epigenéticos" class="service-image">
+      <img src="suplementos.jpg" alt="Suplementos Epigenéticos" class="service-image">
     </div>
     <div class="service-info">
       <h3>Sobre o Produto</h3>
-      <p>Oferecemos uma linha exclusiva de epigenéticos baseados em ciência de ponta, desenvolvidos para otimizar a saúde celular e promover o bem-estar integral.</p>
+      <p>Oferecemos uma linha exclusiva de suplementos epigenéticos baseados em ciência de ponta, desenvolvidos para otimizar a saúde celular e promover o bem-estar integral.</p>
       <p>A epigenética representa a nova fronteira da saúde preventiva, permitindo influenciar positivamente a expressão dos nossos genes através de nutrição direcionada.</p>
       <p>Nossos produtos são rigorosamente testados e formulados com ingredientes de alta qualidade, seguindo os mais elevados padrões internacionais.</p>
     </div>
@@ -1333,7 +1346,53 @@ section[style*="display: block"] {
   </div>
 </section>
 
+<!-- PÁGINA: CURSOS & FORMAÇÕES -->
+<section id="service-cursos" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon"></span>
+    <h2>Cursos & Formações</h2>
+    <p>Capacitação profissional de excelência para o mercado angolano</p>
+  </div>
 
+  <div class="service-content">
+    <div>
+      <img src="educacao.jfif" alt="Cursos e Formações" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Programa</h3>
+      <p>Desenvolvemos programas de formação profissional adaptados às necessidades do mercado angolano, focados em áreas estratégicas de desenvolvimento.</p>
+      <p>Nossos cursos combinam teoria e prática, ministrados por profissionais experientes e reconhecidos nas suas áreas de atuação.</p>
+      <p>Oferecemos formações em diversas áreas: gestão empresarial, tecnologia, saúde, empreendedorismo e desenvolvimento pessoal.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Instrutores Qualificados</h4>
+      <p>Professores com experiência prática e reconhecimento profissional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Certificação</h4>
+      <p>Certificados reconhecidos que valorizam seu currículo profissional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Metodologia Prática</h4>
+      <p>Aprendizagem baseada em casos reais e aplicações práticas.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Flexibilidade</h4>
+      <p>Opções presenciais e online para atender diferentes necessidades.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Invista no Seu Futuro</h3>
+    <p>Descubra nossos programas de formação e dê o próximo passo na sua carreira</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Inscreva-se</a>
+  </div>
+</section>
 
 <!-- PÁGINA: PACOTES SOCIAIS -->
 <section id="service-pacotes" class="service-detail" style="display:none;">
@@ -1388,14 +1447,14 @@ section[style*="display: block"] {
   <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
   
   <div class="service-hero">
-    <span class="service-icon"></span>
+    <span class="service-icon">🔗</span>
     <h2>Intermediação</h2>
     <p>Conexão estratégica entre parceiros de negócio</p>
   </div>
 
   <div class="service-content">
     <div>
-      <img src="inter.jfif" alt="Intermediação de Negócios" class="service-image">
+      <img src="negocios.jpg" alt="Intermediação de Negócios" class="service-image">
     </div>
     <div class="service-info">
       <h3>Sobre o Serviço</h3>
@@ -1443,7 +1502,7 @@ section[style*="display: block"] {
 
   <div class="service-content">
     <div>
-      <img src="saude.jfif" alt="Consulta de Saúde" class="service-image">
+      <img src="saude.jpg" alt="Consulta de Saúde" class="service-image">
     </div>
     <div class="service-info">
       <h3>Sobre o Serviço</h3>
@@ -1479,7 +1538,53 @@ section[style*="display: block"] {
   </div>
 </section>
 
+<!-- PÁGINA: CAPACITAÇÃO PROFISSIONAL -->
+<section id="service-capacitacao" class="service-detail" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  
+  <div class="service-hero">
+    <span class="service-icon"></span>
+    <h2>Capacitação Profissional</h2>
+    <p>Programas de desenvolvimento para impulsionar sua carreira</p>
+  </div>
 
+  <div class="service-content">
+    <div>
+      <img src="livros.jfif" alt="Capacitação Profissional" class="service-image">
+    </div>
+    <div class="service-info">
+      <h3>Sobre o Programa</h3>
+      <p>Desenvolvemos programas customizados de capacitação profissional para empresas e indivíduos, focados em desenvolver competências essenciais para o mercado atual.</p>
+      <p>Nossos programas abrangem liderança, gestão de projetos, comunicação, tecnologia, vendas e outras competências estratégicas.</p>
+      <p>Utilizamos metodologias ativas de aprendizagem que garantem a aplicação prática dos conhecimentos adquiridos.</p>
+    </div>
+  </div>
+
+  <div class="service-features">
+    <div class="feature-card">
+      <h4>Programas In-Company</h4>
+      <p>Treinamentos desenvolvidos especificamente para sua empresa.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Mentoria Individual</h4>
+      <p>Acompanhamento personalizado no desenvolvimento profissional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Workshops Práticos</h4>
+      <p>Sessões intensivas focadas em resolução de problemas reais.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Networking</h4>
+      <p>Conexão com outros profissionais e oportunidades de carreira.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Desenvolva Seu Potencial</h3>
+    <p>Participe dos nossos programas de capacitação e destaque-se no mercado</p>
+    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Participar</a>
+  </div>
+</section>
 
 <!-- PÁGINA: PROJETOS SOCIAIS -->
 <section id="service-projetos" class="service-detail" style="display:none;">
@@ -1493,7 +1598,7 @@ section[style*="display: block"] {
 
   <div class="service-content">
     <div>
-      <img src="sociais.jpeg" alt="Projetos Sociais" class="service-image">
+      <img src="projeto-social.jpg" alt="Projetos Sociais" class="service-image">
     </div>
     <div class="service-info">
       <h3>Sobre a Iniciativa</h3>
@@ -1811,3 +1916,4 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
 </body>
 </html>
+
