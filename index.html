@@ -3,1181 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <title>ASAP TP – Projetos, Comércio e Serviços</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="ASAP TP – Projetos, Comércio e Serviços">
-
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f8fafc; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-body {
-  background: #f8fafc;
-  color: #1e293b;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+header { background: linear-gradient(135deg, rgba(75, 138, 19, 2) 0%, rgba(245, 245, 245, 0.95) 100%); color: #0b2c4d; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; background: linear-gradient(to right, #0f0f0f, #0b0b0c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+header img { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+header img:hover { transform: scale(1.05); }
 
-/* HEADER */
-/*header {
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  color: #000;
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 4px 20px rgba(11, 44, 77, 0.15);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-}*/
-header {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.95) 100%);
-  color: #0b2c4d; /* cor do texto escura para contraste */
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-}
+nav ul { list-style: none; display: flex; gap: 32px; align-items: center; }
+nav li { position: relative; }
+nav a { color: #000; text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; display: block; }
+nav a:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
+/* DROPDOWN COMPACTO */
+.dropdown-panel { position: absolute; top: 120%; left: 50%; transform: translateX(-50%); width: 360px; background: #fff; border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.18); display: none; overflow: hidden; z-index: 1000; animation: slideDown 0.25s ease; }
+@keyframes slideDown { from { opacity: 0; transform: translateX(-50%) translateY(-8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+.dropdown.open .dropdown-panel { display: block; }
 
-header h1 {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  background: linear-gradient(to right, #0f0f0f, #0b0b0c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.panel-tabs { display: grid; grid-template-columns: repeat(2, 1fr); background: #f8fafc; padding: 6px; gap: 6px; border-bottom: 1px solid #e2e8f0; }
+.panel-tab { padding: 9px 14px; border: none; cursor: pointer; background: transparent; font-weight: 600; font-size: 13px; color: #64748b; border-radius: 8px; transition: all 0.25s ease; }
+.panel-tab:hover { background: #e2e8f0; color: #0b2c4d; }
+.panel-tab.active { background: #0b2c4d; color: #fff; box-shadow: 0 3px 8px rgba(11,44,77,0.25); }
 
-header img {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
+.panel-pane { display: none; padding: 10px; }
+.panel-pane.active { display: flex; flex-direction: column; gap: 6px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-header img:hover {
-  transform: scale(1.05);
-}
+.panel-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; color: #0f172a; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 500; transition: all 0.25s ease; border: 1px solid #e2e8f0; background: #fff; position: relative; overflow: hidden; }
+.panel-item::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: #0b2c4d; transform: scaleY(0); transition: transform 0.25s ease; }
+.panel-item:hover::before { transform: scaleY(1); }
+.panel-item:hover { background: #f8fafc; border-color: #0b2c4d; transform: translateX(3px); box-shadow: 0 3px 10px rgba(11,44,77,0.08); }
 
-/* MENU */
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-
-nav li {
-  position: relative;
-}
-
-nav a {
-  color: #000;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: block;
-}
-
-nav a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-/* DROPDOWN MELHORADO */
-.dropdown-panel {
-  position: absolute;
-  top: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  display: none;
-  overflow: hidden;
-  z-index: 1000;
-  animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-.dropdown.open .dropdown-panel {
-  display: block;
-}
-
-/* TABS MELHORADAS */
-.panel-tabs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  background: #f8fafc;
-  padding: 8px;
-  gap: 8px;
-  border-bottom: 2px solid #e2e8f0;
-}
-
-.panel-tab {
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  background: transparent;
-  font-weight: 600;
-  font-size: 15px;
-  color: #64748b;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.panel-tab::before {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 3px;
-  background: #0b2c4d;
-  transition: width 0.3s ease;
-}
-
-.panel-tab:hover {
-  background: #e2e8f0;
-  color: #0b2c4d;
-}
-
-.panel-tab.active {
-  background: #0b2c4d;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.3);
-}
-
-.panel-tab.active::before {
-  width: 60%;
-}
-
-/* CONTENT MELHORADO */
-.panel-pane {
-  display: none;
-  padding: 20px;
-  min-height: 280px;
-}
-
-.panel-pane.active {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.panel-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  color: #0f172a;
-  text-decoration: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 2px solid #e2e8f0;
-  background: #fff;
-  position: relative;
-  overflow: hidden;
-}
-
-.panel-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: #0b2c4d;
-  transform: scaleY(0);
-  transition: transform 0.3s ease;
-}
-
-.panel-item:hover::before {
-  transform: scaleY(1);
-}
-
-.panel-item:hover {
-  background: #f8fafc;
-  border-color: #0b2c4d;
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.1);
-}
-
-.panel-item-icon {
-  font-size: 24px;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
-.panel-item:hover .panel-item-icon {
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  transform: scale(1.1) rotate(5deg);
-  filter: brightness(0) invert(1);
-}
-
-.panel-item-content h4 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #0b2c4d;
-  margin-bottom: 2px;
-}
-
-.panel-item-content p {
-  font-size: 13px;
-  color: #64748b;
-  line-height: 1.4;
-}
+.panel-item-icon { font-size: 18px; flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%); border-radius: 8px; transition: all 0.25s ease; }
+.panel-item:hover .panel-item-icon { background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%); transform: scale(1.05) rotate(4deg); filter: brightness(0) invert(1); }
+.panel-item-content h4 { font-size: 13px; font-weight: 600; color: #0b2c4d; margin-bottom: 1px; }
+.panel-item-content p { font-size: 11px; color: #64748b; line-height: 1.3; }
 
 /* CONTAINER */
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 60px 24px;
+.container { max-width: 1200px; margin: auto; padding: 60px 24px; }
+section { margin-bottom: 48px; animation: fadeInUp 0.6s ease; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-}
+.card { background: #fff; padding: 36px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+.card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-4px); border-left: 4px solid #138A4B; }
+.card h2 { color: #0b2c4d; font-size: 28px; margin-bottom: 16px; font-weight: 700; }
+.card h3 { color: #0b2c4d; font-size: 22px; margin-bottom: 20px; font-weight: 600; }
+.card p  { color: #475569; font-size: 16px; line-height: 1.7; }
+.card ul { list-style: none; padding-left: 0; }
+.card ul li { padding: 12px 0; padding-left: 28px; position: relative; color: #475569; font-size: 16px; }
+.card ul li:before { position: absolute; left: 0; color: #0b2c4d; font-weight: bold; font-size: 18px; }
 
-section {
-  margin-bottom: 48px;
-  animation: fadeInUp 0.6s ease;
-}
+/* SERVIÇOS */
+.service-detail { display: none; }
+.service-hero { background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%); color: #fff; padding: 60px 40px; border-radius: 16px; text-align: center; margin-bottom: 40px; }
+.service-hero h2 { font-size: 42px; margin-bottom: 16px; color: #fff; }
+.service-hero .service-icon { font-size: 64px; margin-bottom: 20px; display: block; }
+.service-hero p { font-size: 20px; opacity: 0.9; max-width: 700px; margin: 0 auto; color: #e0e7ff; }
+.service-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.service-image { width: 100%; height: 400px; border-radius: 16px; object-fit: cover; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+.service-info h3 { color: #0b2c4d; font-size: 28px; margin-bottom: 20px; }
+.service-info p { margin-bottom: 16px; line-height: 1.8; }
+.service-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+.feature-card { background: #fff; padding: 28px; border-radius: 12px; border: 2px solid #e2e8f0; transition: all 0.3s ease; }
+.feature-card:hover { border-color: #0b2c4d; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(11,44,77,0.1); }
+.feature-card h4 { color: #0b2c4d; font-size: 20px; margin-bottom: 12px; }
+.feature-card p { color: #64748b; line-height: 1.7; }
+.cta-section { background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%); padding: 40px; border-radius: 16px; text-align: center; margin-top: 40px; }
+.cta-section h3 { color: #0b2c4d; font-size: 32px; margin-bottom: 16px; }
+.cta-section p  { color: #475569; font-size: 18px; margin-bottom: 24px; }
+.cta-button { display: inline-block; background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%); color: #fff; padding: 16px 40px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(11,44,77,0.3); text-transform: uppercase; letter-spacing: 0.5px; }
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,44,77,0.4); }
+.back-button { display: inline-flex; align-items: center; gap: 8px; color: #0b2c4d; text-decoration: none; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: 2px solid #0b2c4d; transition: all 0.3s ease; margin-bottom: 24px; }
+.back-button:hover { background: #0b2c4d; color: #fff; }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card {
-  background: #fff;
-  padding: 36px;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
-}
-
-.card h2 {
-  color: #0b2c4d;
-  font-size: 28px;
-  margin-bottom: 16px;
-  font-weight: 700;
-}
-
-.card h3 {
-  color: #0b2c4d;
-  font-size: 22px;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.card p {
-  color: #475569;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-.card ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.card ul li {
-  padding: 12px 0;
-  padding-left: 28px;
-  position: relative;
-  color: #475569;
-  font-size: 16px;
-}
-
-.card ul li:before {
-  
-  position: absolute;
-  left: 0;
-  color: #0b2c4d;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-/* PÁGINAS DE SERVIÇOS DETALHADAS */
-.service-detail {
-  display: none;
-}
-
-.service-detail.active {
-  display: block;
-}
-
-.service-hero {
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  color: #fff;
-  padding: 60px 40px;
-  border-radius: 16px;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.service-hero h2 {
-  font-size: 42px;
-  margin-bottom: 16px;
-  color: #fff;
-}
-
-.service-hero .service-icon {
-  font-size: 64px;
-  margin-bottom: 20px;
-  display: block;
-}
-
-.service-hero p {
-  font-size: 20px;
-  opacity: 0.9;
-  max-width: 700px;
-  margin: 0 auto;
-  color: #e0e7ff;
-}
-
-.service-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.service-image {
-  width: 100%;
-  height: 400px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.service-info h3 {
-  color: #0b2c4d;
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.service-info p {
-  margin-bottom: 16px;
-  line-height: 1.8;
-}
-
-.service-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.feature-card {
-  background: #fff;
-  padding: 28px;
-  border-radius: 12px;
-  border: 2px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  border-color: #0b2c4d;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(11, 44, 77, 0.1);
-}
-
-.feature-card h4 {
-  color: #0b2c4d;
-  font-size: 20px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.feature-card h4::before {
-  
-  color: #0b2c4d;
-  font-size: 24px;
-}
-
-.feature-card p {
-  color: #64748b;
-  line-height: 1.7;
-}
-
-.cta-section {
-  background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
-  padding: 40px;
-  border-radius: 16px;
-  text-align: center;
-  margin-top: 40px;
-}
-
-.cta-section h3 {
-  color: #0b2c4d;
-  font-size: 32px;
-  margin-bottom: 16px;
-}
-
-.cta-section p {
-  color: #475569;
-  font-size: 18px;
-  margin-bottom: 24px;
-}
-
-.cta-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  color: #fff;
-  padding: 16px 40px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(11, 44, 77, 0.4);
-}
-
-.back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #0b2c4d;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: 2px solid #0b2c4d;
-  transition: all 0.3s ease;
-  margin-bottom: 24px;
-}
-
-.back-button:hover {
-  background: #0b2c4d;
-  color: #fff;
-}
-
-/* VALORES SECTION */
-.vmv-section {
-  margin-top: 48px;
-}
-
-.values {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.vmv-card {
-  position: relative;
-  padding-top: 60px;
-}
-
-.card-icon {
-  position: absolute;
-  top: 20px;
-  left: 36px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.3);
-}
-
-.card-icon::before {
-  content: '';
-  font-size: 20px;
-}
-
-.values-list {
-  list-style: none;
-  padding: 0;
-}
-
-.values-list li {
-  padding: 8px 0;
-  padding-left: 0 !important;
-}
-
-.values-list li::before {
-  content: "→";
-  margin-right: 8px;
-}
+/* VMV */
+.vmv-section { margin-top: 48px; }
+.values { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
+.vmv-card { position: relative; padding-top: 60px; }
+.values-list { list-style: none; padding: 0; }
+.values-list li { padding: 8px 0; padding-left: 0 !important; }
+.values-list li::before { content: "→"; margin-right: 8px; }
 
 /* FOOTER */
-footer {
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  color: #e0e7ff;
-  text-align: center;
-  padding: 32px 20px;
-  border-top: 3px solid #2d4a6d;
-}
+footer { background: linear-gradient(rgba(75, 138, 19, 2)); color: #e0e7ff; text-align: center; padding: 32px 20px; border-top: 3px solid #2d4a6d; }
+footer p { margin: 6px 0; font-size: 15px; }
+footer strong { color: #fff; font-weight: 600; }
 
-footer p {
-  margin: 6px 0;
-  font-size: 15px;
-}
+/* HERO */
+.hero { position: relative; height: 75vh; z-index: 0; }
+.carousel { width: 100%; height: 100%; position: relative; }
+.slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; }
+.slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(11,44,77,0.7) 0%, rgba(30,58,95,0.5) 100%); }
+.slide.active { opacity: 1; }
+.hero-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; color: #fff; padding: 40px; z-index: 1; max-width: 900px; }
+.hero-overlay h2 { font-size: 48px; margin-bottom: 16px; font-weight: 800; letter-spacing: -1px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); line-height: 1.2; }
+.hero-overlay p  { font-size: 22px; max-width: 700px; margin: 0 auto; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.3); opacity: 0.95; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); font-size: 24px; width: 50px; height: 50px; cursor: pointer; border-radius: 50%; backdrop-filter: blur(10px); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+.carousel-btn:hover { background-color: rgba(255,255,255,0.3); transform: translateY(-50%) scale(1.1); }
+.carousel-btn:nth-child(1) { left: 30px; }
+.carousel-btn:nth-child(2) { right: 30px; }
 
-footer strong {
-  color: #fff;
-  font-weight: 600;
-}
-
-/* HERO CAROUSEL */
-.hero {
- position: relative; /* em vez de fixed */
-  height: 75vh;
-  z-index: 0;
-
-}
-
-.carousel {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1.2s ease-in-out;
-}
-
-.slide::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(11, 44, 77, 0.7) 0%, rgba(30, 58, 95, 0.5) 100%);
-}
-
-.slide.active {
-  opacity: 1;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
-  padding: 40px;
-  z-index: 1;
-  max-width: 900px;
-}
-
-.hero-overlay h2 {
-  font-size: 48px;
-  margin-bottom: 16px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  line-height: 1.2;
-}
-
-.hero-overlay p {
-  font-size: 22px;
-  max-width: 700px;
-  margin: 0 auto;
-  font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  opacity: 0.95;
-}
-
-/* Carousel Button */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  font-size: 24px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  border-radius: 50%;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-btn:nth-child(1) {
-  left: 30px;
-}
-
-.carousel-btn:nth-child(2) {
-  right: 30px;
-}
-
-/* Estilo geral para a seção de Contactos */
-#contactos {
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-.section-badge {
-  display: inline-block;
-  background: #e0e7ff;
-  color: #0b2c4d;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 12px;
-}
-
-.section-header h2 {
-  font-size: 42px;
-  color: #0b2c4d;
-  margin-bottom: 12px;
-  font-weight: 800;
-}
-
-.section-subtitle {
-  font-size: 20px;
-  color: #64748b;
-  font-weight: 400;
-}
-
-/* Container de informações de contato */
-.contact-container {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 40px;
-}
-
-/* Informações de contato */
-.contact-info {
-  background: #fff;
-  padding: 36px;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
-  height: fit-content;
-}
-
-.contact-info h3 {
-  color: #0b2c4d;
-  font-size: 24px;
-  margin-bottom: 28px;
-  font-weight: 700;
-}
-
-.contact-info address {
-  font-style: normal;
-}
-
-.contact-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  padding: 16px;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-  background: #f8fafc;
-}
-
-.contact-item .contact-icon {
-  font-size: 28px;
-  margin-right: 16px;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f1f5f9;
-  border-radius: 10px;
-}
-
-.contact-item .contact-icon img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.contact-item div {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.contact-item strong {
-  font-weight: 700;
-  color: #0b2c4d;
-  display: block;
-  margin-bottom: 4px;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.contact-item p {
-  color: #475569;
-  margin: 0;
-  font-size: 15px;
-}
-
-.contact-item a {
-  color: #0b2c4d;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.contact-item a:hover {
-  color: #1e3a5f;
-  text-decoration: underline;
-}
-
-/* Estilo para o formulário */
-.card form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* Estilo para os campos do formulário */
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #334155;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  font-size: 12px;
-}
-
-input, select, textarea {
-  padding: 14px 16px;
-  font-size: 15px;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  width: 100%;
-  background-color: #f8fafc;
-  color: #1e293b;
-  transition: all 0.3s ease;
-  font-family: inherit;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: #0b2c4d;
-  background-color: #fff;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(11, 44, 77, 0.1);
-}
-
-textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-/* Botão de envio */
-.submit-btn {
-  background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%);
-  color: #fff;
-  border: none;
-  padding: 16px 32px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(11, 44, 77, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-}
-
-.submit-btn::before {
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
-
-.submit-btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(11, 44, 77, 0.4);
-}
-
-.submit-btn:active {
-  transform: translateY(0);
-}
-
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* Mensagem de sucesso/erro */
-.form-message {
-  padding: 16px 20px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  text-align: center;
-  margin-top: 20px;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-message.success {
-  background: #d1fae5;
-  color: #065f46;
-  border: 2px solid #10b981;
-}
-
-.form-message.error {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 2px solid #ef4444;
-}
+/* CONTACTOS */
+#contactos { background: transparent; padding: 0; border-radius: 0; box-shadow: none; }
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-badge { display: inline-block; background: #e0e7ff; color: #0b2c4d; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.section-header h2 { font-size: 42px; color: #0b2c4d; margin-bottom: 12px; font-weight: 800; }
+.section-subtitle { font-size: 20px; color: #64748b; font-weight: 400; }
+.contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
+.contact-info { background: #fff; padding: 36px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; height: fit-content; }
+.contact-info h3 { color: #0b2c4d; font-size: 24px; margin-bottom: 28px; font-weight: 700; }
+.contact-info address { font-style: normal; }
+.contact-item { display: flex; align-items: flex-start; margin-bottom: 24px; padding: 16px; border-radius: 12px; transition: all 0.3s ease; }
+.contact-item:hover { background: #f8fafc; }
+.contact-item .contact-icon { font-size: 28px; margin-right: 16px; flex-shrink: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 10px; }
+.contact-item .contact-icon img { width: 24px; height: 24px; object-fit: contain; }
+.contact-item div { font-size: 15px; line-height: 1.6; }
+.contact-item strong { font-weight: 700; color: #0b2c4d; display: block; margin-bottom: 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.3px; }
+.contact-item p { color: #475569; margin: 0; font-size: 15px; }
+.contact-item a { color: #0b2c4d; text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+.contact-item a:hover { color: #1e3a5f; text-decoration: underline; }
+.card form { display: flex; flex-direction: column; gap: 24px; }
+.form-group { display: flex; flex-direction: column; }
+label { font-size: 12px; font-weight: 600; margin-bottom: 8px; color: #334155; text-transform: uppercase; letter-spacing: 0.3px; }
+input, select, textarea { padding: 14px 16px; font-size: 15px; border: 2px solid #e2e8f0; border-radius: 10px; width: 100%; background-color: #f8fafc; color: #1e293b; transition: all 0.3s ease; font-family: inherit; }
+input:focus, select:focus, textarea:focus { border-color: #0b2c4d; background-color: #fff; outline: none; box-shadow: 0 0 0 3px rgba(11,44,77,0.1); }
+textarea { resize: vertical; min-height: 120px; }
+.submit-btn { background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%); color: #fff; border: none; padding: 16px 32px; font-size: 16px; font-weight: 600; cursor: pointer; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(11,44,77,0.3); text-transform: uppercase; letter-spacing: 0.5px; }
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,44,77,0.4); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.form-message { padding: 16px 20px; border-radius: 10px; font-size: 15px; font-weight: 500; text-align: center; margin-top: 20px; }
+.form-message.success { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
+.form-message.error   { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px 20px;
-  }
-
-  header h1 {
-    font-size: 16px;
-    text-align: center;
-  }
-
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-  }
-
-  nav li {
-    width: 100%;
-  }
-
-  nav a {
-    text-align: center;
-  }
-
-  .hero {
-    height: 60vh;
-  }
-
-  .hero-overlay h2 {
-    font-size: 32px;
-  }
-
-  .hero-overlay p {
-    font-size: 16px;
-    max-width: 90%;
-  }
-
-  .container {
-    padding: 40px 16px;
-    margin-top: 40vh;
-  }
-
-  .dropdown-panel {
-    width: 95vw;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .panel-pane.active {
-    grid-template-columns: 1fr;
-  }
-
-  .panel-tabs {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-container {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .values {
-    grid-template-columns: 1fr;
-  }
-
-  .section-header h2 {
-    font-size: 32px;
-  }
-
-  .card {
-    padding: 24px;
-  }
-
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
-
-  .carousel-btn:nth-child(1) {
-    left: 15px;
-  }
-
-  .carousel-btn:nth-child(2) {
-    right: 15px;
-  }
-
-  .service-content {
-    grid-template-columns: 1fr;
-  }
-
-  .service-hero h2 {
-    font-size: 32px;
-  }
-
-  .service-features {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Animações suaves para transições de página */
-section {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-section[style*="display: none"] {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-section[style*="display: block"] {
-  opacity: 1;
-  transform: translateY(0);
+  header { flex-direction: column; gap: 16px; padding: 16px 20px; }
+  header h1 { font-size: 16px; text-align: center; }
+  nav ul { flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+  nav li { width: 100%; }
+  nav a { text-align: center; }
+  .hero { height: 60vh; }
+  .hero-overlay h2 { font-size: 32px; }
+  .hero-overlay p { font-size: 16px; max-width: 90%; }
+  .container { padding: 40px 16px; }
+  .dropdown-panel { width: 95vw; }
+  .contact-container { grid-template-columns: 1fr; gap: 24px; }
+  .values { grid-template-columns: 1fr; }
+  .section-header h2 { font-size: 32px; }
+  .card { padding: 24px; }
+  .carousel-btn { width: 40px; height: 40px; font-size: 20px; }
+  .carousel-btn:nth-child(1) { left: 15px; }
+  .carousel-btn:nth-child(2) { right: 15px; }
+  .service-content { grid-template-columns: 1fr; }
+  .service-hero h2 { font-size: 32px; }
+  .service-features { grid-template-columns: 1fr; }
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div style="display: flex; align-items: center; gap: 16px;">
+  <div style="display:flex;align-items:center;gap:16px;">
     <img src="logo.jfif" alt="Logo ASAP TP" loading="lazy">
     <h1>ASAP TP – Projetos, Comércio e Serviços</h1>
   </div>
-
   <nav aria-label="Menu principal">
     <ul>
-      <li><a href="#" onclick="showContent('home')" aria-label="Ir para a página inicial">Início</a></li>
-      <li><a href="#" onclick="showContent('sobre')" aria-label="Sobre nós">Sobre Nós</a></li>
-
-      <!-- DROPDOWN SERVIÇOS MELHORADO -->
+      <li><a href="#" onclick="showContent('home')">Início</a></li>
+      <li><a href="#" onclick="showContent('sobre')">Sobre Nós</a></li>
       <li class="dropdown" id="dropServ" aria-haspopup="true" aria-expanded="false">
-        <a href="#" onclick="event.preventDefault(); toggleDrop();" aria-label="Serviços">Serviços ▾</a>
-
-        <div class="dropdown-panel" aria-labelledby="dropServ">
+        <a href="#" onclick="event.preventDefault(); toggleDrop();">Serviços ▾</a>
+        <div class="dropdown-panel">
           <div class="panel-tabs">
-            <button class="panel-tab active" onclick="switchTab(this, 'vendas')">
-              <span> Vendas</span>
-            </button>
-            <button class="panel-tab" onclick="switchTab(this, 'servicos')">
-              <span> Serviços</span>
-            </button>
+            <button class="panel-tab active" onclick="switchTab(this,'vendas')">Vendas</button>
+            <button class="panel-tab" onclick="switchTab(this,'servicos')">Serviços</button>
           </div>
-
           <div class="panel-pane active" id="pane-vendas">
             <a class="panel-item" href="#" onclick="showService('diamantes'); return false;">
               <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Diamantes Naturais</h4>
-                <p>Intermediação de diamantes certificados</p>
-              </div>
+              <div class="panel-item-content"><h4>Diamantes Naturais</h4><p>Trazabilidade de diamantes certificados</p></div>
             </a>
             <a class="panel-item" href="#" onclick="showService('suplementos'); return false;">
               <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Suplementos Epigenéticos</h4>
-                <p>Produtos para saúde e bem-estar</p>
-              </div>
-            </a>
-            <a class="panel-item" href="#" onclick="showService('cursos'); return false;">
-              <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Cursos & Formações</h4>
-                <p>Capacitação profissional especializada</p>
-              </div>
-            </a>
-            <a class="panel-item" href="#" onclick="showService('pacotes'); return false;">
-              <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Pacotes Sociais</h4>
-                <p>Soluções para projetos comunitários</p>
-              </div>
+              <div class="panel-item-content"><h4>Trazabilidade de Ouro</h4><p>Cadeia de custódia e rastreabilidade</p></div>
             </a>
           </div>
-
           <div class="panel-pane" id="pane-servicos">
             <a class="panel-item" href="#" onclick="showService('intermediacao'); return false;">
               <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Intermediação</h4>
-                <p>Conexão entre parceiros de negócio</p>
-              </div>
+              <div class="panel-item-content"><h4>Trazabilidade</h4><p>Conexão entre parceiros de negócio</p></div>
             </a>
             <a class="panel-item" href="#" onclick="showService('consultasaude'); return false;">
               <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Consulta de Saúde</h4>
-                <p>Orientação em saúde epigenética</p>
-              </div>
+              <div class="panel-item-content"><h4>Estudo de Impacto Ambiental</h4><p>EIA com rigor técnico e conformidade</p></div>
             </a>
             <a class="panel-item" href="#" onclick="showService('capacitacao'); return false;">
               <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Capacitação Profissional</h4>
-                <p>Programas de desenvolvimento</p>
-              </div>
-            </a>
-            <a class="panel-item" href="#" onclick="showService('projetos'); return false;">
-              <div class="panel-item-icon"></div>
-              <div class="panel-item-content">
-                <h4>Projetos Sociais</h4>
-                <p>Iniciativas de impacto comunitário</p>
-              </div>
+              <div class="panel-item-content"><h4>Exploração Mineira</h4><p>Prospeção e exploração de recursos minerais</p></div>
             </a>
           </div>
         </div>
       </li>
-
-      <li><a href="#" onclick="showContent('contactos')" aria-label="Página de contatos">Contactos</a></li>
+      <li><a href="#" onclick="showContent('contactos')">Contactos</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- HERO / CARROSSEL -->
 <section class="hero">
   <div class="carousel" id="carousel">
-    <div class="slide active" style="background-image:url('educacao.jfif')" loading="lazy"></div>
-    <div class="slide" style="background-image:url('caro1.jfif')" loading="lazy"></div>
-    <div class="slide" style="background-image:url('livros.jfif')" loading="lazy"></div>
-     <div class="slide" style="background-image:url('diamante.png')" loading="lazy"></div>
-      <div class="slide" style="background-image:url('logo.jfif')" loading="lazy"></div>
+    <div class="slide active" style="background-image:url('gari.jpg')"></div>
+    <div class="slide" style="background-image:url('explo.png')"></div>
+    <div class="slide" style="background-image:url('diamante2.jpg')"></div>
+    <div class="slide" style="background-image:url('impa.png')"></div>
+    <div class="slide" style="background-image:url('diamante3.jpg')"></div>
+    <div class="slide" style="background-image:url('ouro.jpg')"></div>
+    <div class="slide" style="background-image:url('logo.jfif')"></div>
   </div>
-
   <div class="hero-overlay">
     <h2>Inovação, Confiança e Impacto Social</h2>
     <p>Projetos, comércio e serviços para o desenvolvimento de Angola</p>
@@ -1186,57 +231,33 @@ section[style*="display: block"] {
 
 <div class="container">
 
-<!-- HOME -->
 <section id="home">
   <div class="card">
     <h2>Bem-vindo à ASAP TP</h2>
-    <p>
-      A <strong>ASAP TP</strong> é uma empresa angolana multidisciplinar focada
-      em comércio, serviços, saúde, educação e projetos sociais. Trabalhamos com dedicação para promover
-      o desenvolvimento sustentável e o bem-estar da comunidade angolana.
-    </p>
+    <p>A <strong>ASAP TP</strong> é uma empresa angolana multidisciplinar focada em comércio, serviços, saúde, educação e projetos sociais. Trabalhamos com dedicação para promover o desenvolvimento sustentável e o bem-estar da comunidade angolana.</p>
   </div>
-</section>
-
-<!-- SOBRE -->
-<section id="sobre" style="display:none;">
   <div class="card">
     <h2>Sobre Nós</h2>
-    <p>
-      A ASAP TP nasceu com o compromisso de contribuir ativamente para o desenvolvimento de Angola.
-      Atuamos com ética, transparência e impacto social positivo em diversas áreas, sempre priorizando
-      a qualidade dos nossos serviços e a satisfação dos nossos clientes.
-    </p>
+    <p>A ASAP TP nasceu com o compromisso de contribuir ativamente para o desenvolvimento de Angola. Atuamos com ética, transparência e impacto social positivo em diversas áreas, sempre priorizando a qualidade dos nossos serviços e a satisfação dos nossos clientes.</p>
     <br>
-    <p>
-      Nossa missão é criar valor sustentável através de soluções inovadoras que beneficiem tanto
-      nossos parceiros comerciais quanto a sociedade angolana como um todo.
-    </p>
+    <p>Nossa missão é criar valor sustentável através de soluções inovadoras que beneficiem tanto nossos parceiros comerciais quanto a sociedade angolana como um todo.</p>
   </div>
-  
-  <!-- VISÃO MISSÃO VALORES -->
   <section class="vmv-section">
-    <div class="section-header centered">
+    <div class="section-header">
       <span class="section-badge">Nossa Filosofia</span>
       <h2>Visão, Missão e Valores</h2>
       <p class="section-subtitle">Os princípios que nos guiam em cada projeto</p>
     </div>
-    
     <div class="values">
       <article class="card vmv-card">
-        <div class="card-icon"></div>
         <h3>Visão</h3>
         <p>Ser referência internacional em soluções estratégicas e impacto social sustentável, reconhecida pela excelência, inovação e contribuição para o desenvolvimento de Angola e além.</p>
       </article>
-      
       <article class="card vmv-card">
-        <div class="card-icon"></div>
         <h3>Missão</h3>
         <p>Conectar oportunidades de negócio a projetos de desenvolvimento humano através de soluções inovadoras, transparentes e sustentáveis que criam valor partilhado para todas as partes interessadas.</p>
       </article>
-      
       <article class="card vmv-card">
-        <div class="card-icon"></div>
         <h3>Valores</h3>
         <ul class="values-list">
           <li><strong>Ética:</strong> Integridade em todas as ações</li>
@@ -1250,212 +271,83 @@ section[style*="display: block"] {
   </section>
 </section>
 
-<!-- PÁGINA: DIAMANTES NATURAIS -->
-<section id="service-diamantes" class="service-detail" style="display:none;">
-  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon">💎</span>
-    <h2>Diamantes Naturais</h2>
-    <p>Intermediação de diamantes certificados com total transparência e qualidade</p>
+<section id="sobre" style="display:none;">
+  <div class="card">
+    <h2>Sobre Nós</h2>
+    <p>A ASAP TP nasceu com o compromisso de contribuir ativamente para o desenvolvimento de Angola. Atuamos com ética, transparência e impacto social positivo em diversas áreas, sempre priorizando a qualidade dos nossos serviços e a satisfação dos nossos clientes.</p>
+    <br>
+    <p>Nossa missão é criar valor sustentável através de soluções inovadoras que beneficiem tanto nossos parceiros comerciais quanto a sociedade angolana como um todo.</p>
   </div>
-
-  <div class="service-content">
-    <div>
-      <img src="diamante.jfif" alt="Diamantes Naturais" class="service-image">
+  <section class="vmv-section">
+    <div class="section-header">
+      <span class="section-badge">Nossa Filosofia</span>
+      <h2>Visão, Missão e Valores</h2>
+      <p class="section-subtitle">Os princípios que nos guiam em cada projeto</p>
     </div>
+    <div class="values">
+      <article class="card vmv-card"><h3>Visão</h3><p>Ser referência internacional em soluções estratégicas e impacto social sustentável, reconhecida pela excelência, inovação e contribuição para o desenvolvimento de Angola e além.</p></article>
+      <article class="card vmv-card"><h3>Missão</h3><p>Conectar oportunidades de negócio a projetos de desenvolvimento humano através de soluções inovadoras, transparentes e sustentáveis que criam valor partilhado para todas as partes interessadas.</p></article>
+      <article class="card vmv-card">
+        <h3>Valores</h3>
+        <ul class="values-list">
+          <li><strong>Ética:</strong> Integridade em todas as ações</li>
+          <li><strong>Confiança:</strong> Transparência total</li>
+          <li><strong>Sustentabilidade:</strong> Responsabilidade ambiental</li>
+          <li><strong>Inovação:</strong> Soluções criativas</li>
+          <li><strong>Impacto Social:</strong> Transformação positiva</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</section>
+
+<section id="service-diamantes" style="display:none;">
+  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
+  <div class="service-hero"><span class="service-icon"></span><h2>Diamantes Naturais</h2><p>Trazabilidade de diamantes certificados com total transparência e qualidade</p></div>
+  <div class="service-content">
+    <div><img src="diamante2.jpg" alt="Diamantes Naturais" class="service-image"></div>
     <div class="service-info">
       <h3>Sobre o Serviço</h3>
-      <p>Somos especializados na intermediação de diamantes naturais certificados, conectando produtores angolanos a compradores internacionais com total segurança e conformidade legal.</p>
+      <p>Somos especializados na Trazabilidade de diamantes naturais certificados, conectando produtores angolanos a compradores internacionais com total segurança e conformidade legal.</p>
       <p>Trabalhamos apenas com diamantes certificados pelo Processo Kimberley, garantindo origem ética e procedência legal de todas as pedras comercializadas.</p>
       <p>Nossa expertise no mercado de diamantes angolano permite oferecer as melhores oportunidades de negócio, sempre com transparência e profissionalismo.</p>
     </div>
   </div>
-
   <div class="service-features">
-    <div class="feature-card">
-      <h4>Certificação</h4>
-      <p>Todos os diamantes são certificados pelo Processo Kimberley, garantindo autenticidade e origem ética.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Transparência</h4>
-      <p>Documentação completa e rastreabilidade em todas as transações comerciais.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Rede Global</h4>
-      <p>Conexões com compradores e investidores em mercados internacionais.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Assessoria Completa</h4>
-      <p>Suporte em todas as etapas do processo de comercialização.</p>
-    </div>
+    <div class="feature-card"><h4>Certificação</h4><p>Todos os diamantes são certificados pelo Processo Kimberley, garantindo autenticidade e origem ética.</p></div>
+    <div class="feature-card"><h4>Transparência</h4><p>Documentação completa e rastreabilidade em todas as transações comerciais.</p></div>
+    <div class="feature-card"><h4>Rede Global</h4><p>Conexões com compradores e investidores em mercados internacionais.</p></div>
+    <div class="feature-card"><h4>Assessoria Completa</h4><p>Suporte em todas as etapas do processo de comercialização.</p></div>
   </div>
-
-  <div class="cta-section">
-    <h3>Interessado em Diamantes Naturais?</h3>
-    <p>Entre em contacto connosco para mais informações sobre oportunidades de negócio</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Contacte-nos</a>
-  </div>
+  <div class="cta-section"><h3>Interessado em Diamantes Naturais?</h3><p>Entre em contacto connosco para mais informações sobre oportunidades de negócio</p><a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Contacte-nos</a></div>
 </section>
 
-<!-- PÁGINA: SUPLEMENTOS EPIGENÉTICOS -->
-<section id="service-suplementos" class="service-detail" style="display:none;">
+<section id="service-suplementos" style="display:none;">
   <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon"></span>
-    <h2>Suplementos Epigenéticos</h2>
-    <p>Produtos inovadores para saúde, bem-estar e longevidade</p>
-  </div>
-
+  <div class="service-hero"><span class="service-icon"></span><h2>Rastreabilidade e Cadeia de Custódia do Ouro</h2><p>A ASAP TP implementa sistemas rigorosos de rastreabilidade e controlo da cadeia de custódia do ouro.</p></div>
   <div class="service-content">
-    <div>
-      <img src="suplementos.jpg" alt="Suplementos Epigenéticos" class="service-image">
-    </div>
+    <div><img src="ouro.jpg" alt="Ouro" class="service-image"></div>
     <div class="service-info">
       <h3>Sobre o Produto</h3>
-      <p>Oferecemos uma linha exclusiva de suplementos epigenéticos baseados em ciência de ponta, desenvolvidos para otimizar a saúde celular e promover o bem-estar integral.</p>
-      <p>A epigenética representa a nova fronteira da saúde preventiva, permitindo influenciar positivamente a expressão dos nossos genes através de nutrição direcionada.</p>
-      <p>Nossos produtos são rigorosamente testados e formulados com ingredientes de alta qualidade, seguindo os mais elevados padrões internacionais.</p>
+      <p>Garantimos que todo o ouro comercializado possua origem comprovada, documentação válida e enquadramento legal adequado, reforçando a credibilidade junto de compradores, instituições financeiras e parceiros internacionais.</p>
+      <p>Atuamos em conformidade com a legislação vigente e alinhados às melhores práticas internacionais de governança no setor mineiro.</p>
+      <p>A rastreabilidade adequada aumenta a confiança de investidores, o acesso a mercados internacionais, a segurança jurídica nas transações e a valorização do produto no mercado global.</p>
     </div>
   </div>
-
   <div class="service-features">
-    <div class="feature-card">
-      <h4>Ciência Avançada</h4>
-      <p>Fórmulas baseadas em pesquisas epigenéticas de última geração.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Qualidade Premium</h4>
-      <p>Ingredientes selecionados e testados seguindo padrões internacionais.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Resultados Comprováveis</h4>
-      <p>Produtos com eficácia validada por estudos científicos.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Orientação Personalizada</h4>
-      <p>Suporte profissional para escolha dos produtos adequados.</p>
-    </div>
+    <div class="feature-card"><h4>Verificação da origem legal do ouro</h4></div>
+    <div class="feature-card"><h4>Registo e documentação da cadeia de custódia</h4></div>
+    <div class="feature-card"><h4>Cumprimento das normas de compliance e due diligence</h4></div>
+    <div class="feature-card"><h4>Prevenção ao comércio ilícito e branqueamento de capitais</h4></div>
   </div>
-
-  <div class="cta-section">
-    <h3>Invista na Sua Saúde</h3>
-    <p>Descubra como os suplementos epigenéticos podem transformar seu bem-estar</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Saiba Mais</a>
-  </div>
+  <div class="cta-section"><h3>Nos escolha</h3><p>Nosso compromisso é assegurar que cada operação seja conduzida com responsabilidade, transparência e elevado padrão ético.</p><a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Saiba Mais</a></div>
 </section>
 
-<!-- PÁGINA: CURSOS & FORMAÇÕES -->
-<section id="service-cursos" class="service-detail" style="display:none;">
+<section id="service-intermediacao" style="display:none;">
   <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon"></span>
-    <h2>Cursos & Formações</h2>
-    <p>Capacitação profissional de excelência para o mercado angolano</p>
-  </div>
-
+  <div class="service-hero"><span class="service-icon"></span><h2>Trazabilidade</h2><p>Conexão estratégica entre parceiros de negócio</p></div>
   <div class="service-content">
-    <div>
-      <img src="educacao.jfif" alt="Cursos e Formações" class="service-image">
-    </div>
-    <div class="service-info">
-      <h3>Sobre o Programa</h3>
-      <p>Desenvolvemos programas de formação profissional adaptados às necessidades do mercado angolano, focados em áreas estratégicas de desenvolvimento.</p>
-      <p>Nossos cursos combinam teoria e prática, ministrados por profissionais experientes e reconhecidos nas suas áreas de atuação.</p>
-      <p>Oferecemos formações em diversas áreas: gestão empresarial, tecnologia, saúde, empreendedorismo e desenvolvimento pessoal.</p>
-    </div>
-  </div>
-
-  <div class="service-features">
-    <div class="feature-card">
-      <h4>Instrutores Qualificados</h4>
-      <p>Professores com experiência prática e reconhecimento profissional.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Certificação</h4>
-      <p>Certificados reconhecidos que valorizam seu currículo profissional.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Metodologia Prática</h4>
-      <p>Aprendizagem baseada em casos reais e aplicações práticas.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Flexibilidade</h4>
-      <p>Opções presenciais e online para atender diferentes necessidades.</p>
-    </div>
-  </div>
-
-  <div class="cta-section">
-    <h3>Invista no Seu Futuro</h3>
-    <p>Descubra nossos programas de formação e dê o próximo passo na sua carreira</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Inscreva-se</a>
-  </div>
-</section>
-
-<!-- PÁGINA: PACOTES SOCIAIS -->
-<section id="service-pacotes" class="service-detail" style="display:none;">
-  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon"></span>
-    <h2>Pacotes Sociais</h2>
-    <p>Soluções integradas para projetos comunitários e de responsabilidade social</p>
-  </div>
-
-  <div class="service-content">
-    <div>
-      <img src="social.jpg" alt="Pacotes Sociais" class="service-image">
-    </div>
-    <div class="service-info">
-      <h3>Sobre a Iniciativa</h3>
-      <p>Desenvolvemos pacotes personalizados para empresas e organizações que desejam implementar projetos de responsabilidade social com impacto real nas comunidades.</p>
-      <p>Nossos pacotes incluem materiais educativos, kits de saúde, programas de formação comunitária e muito mais, sempre focados em gerar transformação sustentável.</p>
-      <p>Trabalhamos em parceria com ONGs locais e internacionais para maximizar o impacto social dos projetos.</p>
-    </div>
-  </div>
-
-  <div class="service-features">
-    <div class="feature-card">
-      <h4>Personalização</h4>
-      <p>Pacotes adaptados aos objetivos específicos de cada organização.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Impacto Mensurável</h4>
-      <p>Relatórios detalhados sobre o impacto social gerado.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Gestão Completa</h4>
-      <p>Coordenamos todas as etapas do projeto social.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Parcerias Estratégicas</h4>
-      <p>Rede estabelecida com organizações sociais de confiança.</p>
-    </div>
-  </div>
-
-  <div class="cta-section">
-    <h3>Faça a Diferença</h3>
-    <p>Desenvolva projetos sociais de impacto com nossa assessoria especializada</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Contacte-nos</a>
-  </div>
-</section>
-
-<!-- PÁGINA: INTERMEDIAÇÃO -->
-<section id="service-intermediacao" class="service-detail" style="display:none;">
-  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon">🔗</span>
-    <h2>Intermediação</h2>
-    <p>Conexão estratégica entre parceiros de negócio</p>
-  </div>
-
-  <div class="service-content">
-    <div>
-      <img src="negocios.jpg" alt="Intermediação de Negócios" class="service-image">
-    </div>
+    <div><img src="inter.png" alt="Intermediação" class="service-image"></div>
     <div class="service-info">
       <h3>Sobre o Serviço</h3>
       <p>Facilitamos conexões estratégicas entre empresas, investidores e oportunidades de negócio em Angola e internacionalmente.</p>
@@ -1463,280 +355,98 @@ section[style*="display: block"] {
       <p>Atuamos em diversos setores: mineração, saúde, educação, tecnologia, infraestrutura e muito mais.</p>
     </div>
   </div>
-
   <div class="service-features">
-    <div class="feature-card">
-      <h4>Rede Global</h4>
-      <p>Contactos estratégicos em Angola e mercados internacionais.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Due Diligence</h4>
-      <p>Análise criteriosa de oportunidades e parceiros de negócio.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Negociação</h4>
-      <p>Suporte completo em processos de negociação comercial.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Confidencialidade</h4>
-      <p>Total discrição e sigilo em todas as operações.</p>
-    </div>
+    <div class="feature-card"><h4>Rede Global</h4><p>Contactos estratégicos em Angola e mercados internacionais.</p></div>
+    <div class="feature-card"><h4>Due Diligence</h4><p>Análise criteriosa de oportunidades e parceiros de negócio.</p></div>
+    <div class="feature-card"><h4>Negociação</h4><p>Suporte completo em processos de negociação comercial.</p></div>
+    <div class="feature-card"><h4>Confidencialidade</h4><p>Total discrição e sigilo em todas as operações.</p></div>
   </div>
-
-  <div class="cta-section">
-    <h3>Expanda Seus Negócios</h3>
-    <p>Conecte-se a oportunidades estratégicas com nossa intermediação</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Fale Connosco</a>
-  </div>
+  <div class="cta-section"><h3>Expanda Seus Negócios</h3><p>Conecte-se a oportunidades estratégicas com nossa intermediação</p><a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Fale Connosco</a></div>
 </section>
 
-<!-- PÁGINA: CONSULTA DE SAÚDE -->
-<section id="service-consultasaude" class="service-detail" style="display:none;">
+<section id="service-consultasaude" style="display:none;">
   <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon"></span>
-    <h2>Consulta de Saúde</h2>
-    <p>Orientação especializada em saúde epigenética e bem-estar</p>
-  </div>
-
+  <div class="service-hero"><span class="service-icon"></span><h2>Estudo de Impacto Ambiental (EIA)</h2><p>Avaliação ambiental com rigor técnico e compromisso com o desenvolvimento sustentável</p></div>
   <div class="service-content">
-    <div>
-      <img src="saude.jpg" alt="Consulta de Saúde" class="service-image">
-    </div>
+    <div><img src="impa.png" alt="Ambiental" class="service-image"></div>
     <div class="service-info">
       <h3>Sobre o Serviço</h3>
-      <p>Oferecemos consultas personalizadas de saúde com foco em abordagem epigenética, nutrição funcional e medicina preventiva.</p>
-      <p>Nossos profissionais avaliam seu perfil de saúde de forma holística, considerando fatores genéticos, estilo de vida e ambiente.</p>
-      <p>Desenvolvemos planos personalizados de saúde e bem-estar baseados em evidências científicas e adaptados à sua realidade.</p>
+      <p>Realizamos Estudos de Impacto Ambiental (EIA) com rigor técnico e compromisso com o desenvolvimento sustentável.</p>
+      <p>O nosso objetivo é garantir que cada projeto seja executado em conformidade com a legislação ambiental vigente e com responsabilidade socioambiental.</p>
+      <p>Oferecemos soluções completas desde o diagnóstico inicial até ao acompanhamento e monitorização ambiental.</p>
     </div>
   </div>
-
   <div class="service-features">
-    <div class="feature-card">
-      <h4>Avaliação Completa</h4>
-      <p>Análise detalhada do seu estado de saúde e fatores de risco.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Plano Personalizado</h4>
-      <p>Estratégias individualizadas de saúde e prevenção.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Acompanhamento</h4>
-      <p>Monitorização contínua da evolução da sua saúde.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Abordagem Integrativa</h4>
-      <p>Combinação de medicina convencional e terapias complementares.</p>
-    </div>
+    <div class="feature-card"><h4>Elaboração de EIA</h4></div>
+    <div class="feature-card"><h4>Consultoria em Sustentabilidade Empresarial</h4></div>
+    <div class="feature-card"><h4>Licenciamento Ambiental</h4></div>
+    <div class="feature-card"><h4>Plano de Gestão Ambiental (PGA)</h4></div>
+    <div class="feature-card"><h4>Relatório de Impacto Ambiental (RIMA)</h4></div>
+    <div class="feature-card"><h4>Auditorias Ambientais</h4></div>
   </div>
-
-  <div class="cta-section">
-    <h3>Cuide da Sua Saúde</h3>
-    <p>Agende uma consulta e inicie sua jornada rumo ao bem-estar integral</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Agendar Consulta</a>
-  </div>
+  <div class="cta-section"><h3>Elaboração de EIA</h3><a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Solicite uma Consultoria</a></div>
 </section>
 
-<!-- PÁGINA: CAPACITAÇÃO PROFISSIONAL -->
-<section id="service-capacitacao" class="service-detail" style="display:none;">
+<section id="service-capacitacao" style="display:none;">
   <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon"></span>
-    <h2>Capacitação Profissional</h2>
-    <p>Programas de desenvolvimento para impulsionar sua carreira</p>
-  </div>
-
+  <div class="service-hero"><span class="service-icon">⛏️</span><h2>Exploração Mineira</h2><p>A ASAP TP desenvolve projetos de exploração mineira com visão estratégica</p></div>
   <div class="service-content">
-    <div>
-      <img src="livros.jfif" alt="Capacitação Profissional" class="service-image">
-    </div>
+    <div><img src="explo.png" alt="Exploração Mineira" class="service-image"></div>
     <div class="service-info">
       <h3>Sobre o Programa</h3>
-      <p>Desenvolvemos programas customizados de capacitação profissional para empresas e indivíduos, focados em desenvolver competências essenciais para o mercado atual.</p>
-      <p>Nossos programas abrangem liderança, gestão de projetos, comunicação, tecnologia, vendas e outras competências estratégicas.</p>
-      <p>Utilizamos metodologias ativas de aprendizagem que garantem a aplicação prática dos conhecimentos adquiridos.</p>
+      <p>Atuamos na prospeção, pesquisa e exploração de recursos minerais, promovendo operações eficientes, seguras e sustentáveis. Nosso modelo de atuação integra tecnologia, gestão especializada e conformidade com a legislação vigente em Angola.</p>
     </div>
   </div>
-
   <div class="service-features">
-    <div class="feature-card">
-      <h4>Programas In-Company</h4>
-      <p>Treinamentos desenvolvidos especificamente para sua empresa.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Mentoria Individual</h4>
-      <p>Acompanhamento personalizado no desenvolvimento profissional.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Workshops Práticos</h4>
-      <p>Sessões intensivas focadas em resolução de problemas reais.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Networking</h4>
-      <p>Conexão com outros profissionais e oportunidades de carreira.</p>
-    </div>
+    <div class="feature-card"><h4>Segurança jurídica e licenciamento adequado</h4></div>
+    <div class="feature-card"><h4>Sustentabilidade ambiental</h4></div>
+    <div class="feature-card"><h4>Rentabilidade do investimento</h4></div>
+    <div class="feature-card"><h4>Valorização dos recursos minerais</h4></div>
   </div>
-
-  <div class="cta-section">
-    <h3>Desenvolva Seu Potencial</h3>
-    <p>Participe dos nossos programas de capacitação e destaque-se no mercado</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Participar</a>
-  </div>
+  <div class="cta-section"><h3>Nosso Potencial</h3><p>Acreditamos que a mineração responsável é um motor essencial para o crescimento económico, geração de emprego e desenvolvimento regional.</p><a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Entre em Contacto</a></div>
 </section>
 
-<!-- PÁGINA: PROJETOS SOCIAIS -->
-<section id="service-projetos" class="service-detail" style="display:none;">
-  <a href="#" class="back-button" onclick="showContent('home'); return false;">← Voltar</a>
-  
-  <div class="service-hero">
-    <span class="service-icon"></span>
-    <h2>Projetos Sociais</h2>
-    <p>Iniciativas de impacto comunitário e transformação social</p>
-  </div>
-
-  <div class="service-content">
-    <div>
-      <img src="projeto-social.jpg" alt="Projetos Sociais" class="service-image">
-    </div>
-    <div class="service-info">
-      <h3>Sobre a Iniciativa</h3>
-      <p>Desenvolvemos e gerimos projetos sociais focados em educação, saúde, empregabilidade e desenvolvimento comunitário em Angola.</p>
-      <p>Trabalhamos em parceria com comunidades locais, identificando necessidades reais e desenvolvendo soluções sustentáveis e de longo prazo.</p>
-      <p>Nossos projetos já impactaram milhares de vidas através de ações concretas em educação, formação profissional e apoio comunitário.</p>
-    </div>
-  </div>
-
-  <div class="service-features">
-    <div class="feature-card">
-      <h4>Educação Comunitária</h4>
-      <p>Programas de alfabetização e educação básica.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Saúde Preventiva</h4>
-      <p>Campanhas de conscientização e acesso a cuidados básicos.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Empregabilidade</h4>
-      <p>Formação profissional para inserção no mercado de trabalho.</p>
-    </div>
-    <div class="feature-card">
-      <h4>Sustentabilidade</h4>
-      <p>Projetos de geração de renda e autonomia comunitária.</p>
-    </div>
-  </div>
-
-  <div class="cta-section">
-    <h3>Participe da Mudança</h3>
-    <p>Junte-se a nós na construção de um futuro melhor para Angola</p>
-    <a href="#" onclick="showContent('contactos'); return false;" class="cta-button">Colabore</a>
-  </div>
-</section>
-
-<!-- CONTACTOS -->
 <section id="contactos" style="display:none;">
-  <div class="section-header centered">
+  <div class="section-header">
     <span class="section-badge">Contactos</span>
     <h2>Entre em Contacto</h2>
     <p class="section-subtitle">Estamos prontos para ajudar</p>
   </div>
-  
   <div class="contact-container">
     <div class="contact-info">
       <h3>Informações de Contacto</h3>
       <address>
-        <div class="contact-item">
-          <span class="contact-icon"><img src="empresa.png" alt="Empresa"></span>
-          <div>
-            <strong>Empresa</strong>
-            <p>ASAP TP – Projetos, Comércios e Serviços</p>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <span class="contact-icon"><img src="nif.png" alt="NIF"></span>
-          <div>
-            <strong>NIF</strong>
-            <p>5002197618</p>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <span class="contact-icon"><img src="email.png" alt="Email"></span>
-          <div>
-            <strong>Email</strong>
-            <p><a href="mailto:geral@asap-ao.com">geral@asap-ao.com</a></p>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <span class="contact-icon"><img src="tele.png" alt="Telefone"></span>
-          <div>
-            <strong>Telefone/WhatsApp</strong>
-            <p><a href="tel:+244929952190">+244 929 952 190</a></p>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <span class="contact-icon"><img src="loca.png" alt="Localização"></span>
-          <div>
-            <strong>Localização</strong>
-            <p>Cuíto, Centralidade Belo Horizonte<br>Quadra: 44, Prédio: 24, Apt: 1.1</p>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <span class="contact-icon"><img src="horario.png" alt="Horário"></span>
-          <div>
-            <strong>Horário de Atendimento</strong>
-            <p>Segunda a Sexta: 8h00 - 17h00<br>Sábado: 8h00 - 13h00</p>
-          </div>
-        </div>
+        <div class="contact-item"><span class="contact-icon"><img src="empresa.png" alt="Empresa"></span><div><strong>Empresa</strong><p>ASAP TP – Projetos, Comércios e Serviços</p></div></div>
+        <div class="contact-item"><span class="contact-icon"><img src="nif.png" alt="NIF"></span><div><strong>NIF</strong><p>5002197618</p></div></div>
+        <div class="contact-item"><span class="contact-icon"><img src="email.png" alt="Email"></span><div><strong>Email</strong><p><a href="mailto:geral@asap-ao.com">geral@asap-ao.com</a></p></div></div>
+        <div class="contact-item"><span class="contact-icon"><img src="tele.png" alt="Telefone"></span><div><strong>Telefone/WhatsApp</strong><p><a href="tel:+244929952190">+244 929 952 190</a></p></div></div>
+        <div class="contact-item"><span class="contact-icon"><img src="loca.png" alt="Localização"></span><div><strong>Localização</strong><p>Cuíto, Centralidade Belo Horizonte<br>Quadra: 44, Prédio: 24, Apt: 1.1</p></div></div>
+        <div class="contact-item"><span class="contact-icon"><img src="horario.png" alt="Horário"></span><div><strong>Horário de Atendimento</strong><p>Segunda a Sexta: 8h00 - 17h00<br>Sábado: 8h00 - 13h00</p></div></div>
       </address>
     </div>
     <div class="card">
       <h3>Envie-nos uma Mensagem</h3>
       <form id="contactForm" action="https://formspree.io/f/xwpkpoqe" method="POST">
+        <div class="form-group"><label for="name">Nome Completo *</label><input type="text" id="name" name="name" required placeholder="Seu nome completo"></div>
+        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="_replyto" required placeholder="seu.email@exemplo.com"></div>
+        <div class="form-group"><label for="phone">Telefone</label><input type="tel" id="phone" name="phone" placeholder="+244 900 000 000"></div>
         <div class="form-group">
-          <label for="name">Nome Completo *</label>
-          <input type="text" id="name" name="name" required placeholder="Seu nome completo">
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="_replyto" required placeholder="seu.email@exemplo.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="phone">Telefone</label>
-          <input type="tel" id="phone" name="phone" placeholder="+244 900 000 000">
-        </div>
-        
-        <div class="form-group">
-          <label for="subject">Assunto *</label>
+          <label for="subject">Assunto</label>
           <select id="subject" name="subject" required>
             <option value="">Selecione um assunto</option>
-            <option value="Intermediação de Diamantes">Intermediação de Diamantes</option>
-            <option value="Saúde Epigenética">Saúde Epigenética</option>
-            <option value="Cursos e Formação">Cursos e Formação</option>
-            <option value="Projetos Sociais">Projetos Sociais</option>
+                      <option value="Trazabilidade de Ouro">Trazabilidade de Ouro</option>
+            <option value="Trazabilidade de Negócios">Trazabilidade de Negócios</option>
+            <option value="Estudo de Impacto Ambiental (EIA)">Estudo de Impacto Ambiental (EIA)</option>
+            <option value="Exploração Mineira">Exploração Mineira</option>
+
             <option value="Outro">Outro</option>
           </select>
         </div>
-        
-        <div class="form-group">
-          <label for="message">Mensagem *</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Escreva sua mensagem aqui..."></textarea>
-        </div>
-        
+        <div class="form-group"><label for="message">Mensagem</label><textarea id="message" name="message" rows="5" required placeholder="Escreva sua mensagem aqui..."></textarea></div>
         <input type="hidden" name="_subject" value="Nova mensagem do site ASAP TP">
         <input type="hidden" name="_next" value="#contactos">
         <input type="text" name="_gotcha" style="display:none">
-        
-        <button type="submit" class="submit-btn" id="submitBtn">
-          <span>Enviar Mensagem</span>
-        </button>
+        <button type="submit" class="submit-btn" id="submitBtn"><span>Enviar Mensagem</span></button>
       </form>
       <div id="formMessage"></div>
     </div>
@@ -1752,168 +462,67 @@ section[style*="display: block"] {
 
 <script>
 function toggleDrop() {
-  const dropServ = document.getElementById("dropServ");
-  dropServ.classList.toggle("open");
-  dropServ.setAttribute("aria-expanded", dropServ.classList.contains("open"));
+  const d = document.getElementById("dropServ");
+  d.classList.toggle("open");
+  d.setAttribute("aria-expanded", d.classList.contains("open"));
 }
 
 function switchTab(btn, tab) {
   document.querySelectorAll(".panel-tab").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
-
   document.querySelectorAll(".panel-pane").forEach(p => p.classList.remove("active"));
   document.getElementById("pane-" + tab).classList.add("active");
 }
 
 document.addEventListener("click", function(e) {
-  const dropServ = document.getElementById("dropServ");
-  if (!dropServ.contains(e.target)) {
-    dropServ.classList.remove("open");
-    dropServ.setAttribute("aria-expanded", "false");
-  }
+  const d = document.getElementById("dropServ");
+  if (!d.contains(e.target)) { d.classList.remove("open"); d.setAttribute("aria-expanded","false"); }
 });
 
-/* Função para mostrar conteúdo */
-function showContent(sectionId) {
-  // Esconder todas as seções
-  document.querySelectorAll('.container > section').forEach(section => {
-    section.style.display = 'none';
-  });
-
-  // Mostrar a seção específica
-  const targetSection = document.getElementById(sectionId);
-  if (targetSection) {
-    targetSection.style.display = 'block';
-  }
-  
-  // Fechar dropdown se estiver aberto
+function showContent(id) {
+  document.querySelectorAll('.container > section').forEach(s => s.style.display = 'none');
+  const t = document.getElementById(id);
+  if (t) t.style.display = 'block';
   document.getElementById("dropServ").classList.remove("open");
-  
-  // Scroll suave para o topo do conteúdo
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* Função para mostrar páginas de serviços */
-function showService(serviceId) {
-  // Esconder todas as seções
-  document.querySelectorAll('.container > section').forEach(section => {
-    section.style.display = 'none';
-  });
-
-  // Mostrar a página do serviço específico
-  const serviceSection = document.getElementById('service-' + serviceId);
-  if (serviceSection) {
-    serviceSection.style.display = 'block';
-  }
-  
-  // Fechar dropdown
+function showService(id) {
+  document.querySelectorAll('.container > section').forEach(s => s.style.display = 'none');
+  const t = document.getElementById('service-' + id);
+  if (t) t.style.display = 'block';
   document.getElementById("dropServ").classList.remove("open");
-  
-  // Scroll para o topo
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* CAROUSEL */
 const slides = document.querySelectorAll('.slide');
-let currentSlide = 0;
-let slideInterval;
-
-function showSlide(index) {
-  slides.forEach(s => s.classList.remove('active'));
-  slides[index].classList.add('active');
-}
-
-function startCarousel() {
-  slideInterval = setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }, 5000);
-}
-
-function stopCarousel() {
-  clearInterval(slideInterval);
-}
-
-// Iniciar carrossel
+let cur = 0, iv;
+function showSlide(i) { slides.forEach(s => s.classList.remove('active')); slides[i].classList.add('active'); }
+function startCarousel() { iv = setInterval(() => { cur = (cur+1)%slides.length; showSlide(cur); }, 5000); }
+function stopCarousel() { clearInterval(iv); }
 startCarousel();
 
-// Adicionar navegação de botões
-const prevBtn = document.createElement('button');
-const nextBtn = document.createElement('button');
-prevBtn.innerHTML = '◁';
-nextBtn.innerHTML = '▷';
-prevBtn.setAttribute('aria-label', 'Slide anterior');
-nextBtn.setAttribute('aria-label', 'Próximo slide');
+const prev = document.createElement('button'), next = document.createElement('button');
+prev.innerHTML='◁'; next.innerHTML='▷';
+prev.setAttribute('aria-label','Slide anterior'); next.setAttribute('aria-label','Próximo slide');
+prev.classList.add('carousel-btn'); next.classList.add('carousel-btn');
+document.querySelector('.hero').append(prev, next);
+prev.addEventListener('click',()=>{stopCarousel();cur=(cur-1+slides.length)%slides.length;showSlide(cur);startCarousel();});
+next.addEventListener('click',()=>{stopCarousel();cur=(cur+1)%slides.length;showSlide(cur);startCarousel();});
+document.querySelector('.hero').addEventListener('mouseenter',stopCarousel);
+document.querySelector('.hero').addEventListener('mouseleave',startCarousel);
 
-prevBtn.classList.add('carousel-btn');
-nextBtn.classList.add('carousel-btn');
-
-document.querySelector('.hero').append(prevBtn, nextBtn);
-
-prevBtn.addEventListener('click', () => {
-  stopCarousel();
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  showSlide(currentSlide);
-  startCarousel();
-});
-
-nextBtn.addEventListener('click', () => {
-  stopCarousel();
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-  startCarousel();
-});
-
-// Pausar carrossel quando mouse está sobre ele
-document.querySelector('.hero').addEventListener('mouseenter', stopCarousel);
-document.querySelector('.hero').addEventListener('mouseleave', startCarousel);
-
-// Formulário de contato com Formspree
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  
-  const submitBtn = document.getElementById('submitBtn');
-  const formMessage = document.getElementById('formMessage');
-  const form = this;
-  
-  // Desabilitar botão durante envio
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span>Enviando...</span>';
-  
+  const btn = document.getElementById('submitBtn'), msg = document.getElementById('formMessage');
+  btn.disabled = true; btn.innerHTML = '<span>Enviando...</span>';
   try {
-    const formData = new FormData(form);
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-    
-    if (response.ok) {
-      formMessage.className = 'form-message success';
-      formMessage.textContent = '✓ Mensagem enviada com sucesso! Entraremos em contacto em breve.';
-      form.reset();
-    } else {
-      throw new Error('Erro no envio');
-    }
-  } catch (error) {
-    formMessage.className = 'form-message error';
-    formMessage.textContent = '✗ Erro ao enviar mensagem. Por favor, tente novamente ou contacte-nos diretamente pelo email geral@asap-ao.com';
-  } finally {
-    // Reabilitar botão
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<span>Enviar Mensagem</span>';
-    
-    // Remover mensagem após 5 segundos
-    setTimeout(() => {
-      formMessage.textContent = '';
-      formMessage.className = '';
-    }, 5000);
-  }
+    const r = await fetch(this.action, {method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+    if (r.ok) { msg.className='form-message success'; msg.textContent='✓ Mensagem enviada com sucesso! Entraremos em contacto em breve.'; this.reset(); }
+    else throw new Error();
+  } catch { msg.className='form-message error'; msg.textContent='✗ Erro ao enviar. Contacte-nos em geral@asap-ao.com'; }
+  finally { btn.disabled=false; btn.innerHTML='<span>Enviar Mensagem</span>'; setTimeout(()=>{msg.textContent='';msg.className='';},5000); }
 });
 </script>
-
 </body>
 </html>
-
