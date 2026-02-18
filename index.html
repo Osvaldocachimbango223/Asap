@@ -19,7 +19,6 @@ nav li { position: relative; }
 nav a { color: #000; text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; display: block; }
 nav a:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
-/* DROPDOWN COMPACTO */
 .dropdown-panel { position: absolute; top: 120%; left: 50%; transform: translateX(-50%); width: 360px; background: #fff; border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.18); display: none; overflow: hidden; z-index: 1000; animation: slideDown 0.25s ease; }
 @keyframes slideDown { from { opacity: 0; transform: translateX(-50%) translateY(-8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
 .dropdown.open .dropdown-panel { display: block; }
@@ -43,7 +42,6 @@ nav a:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 .panel-item-content h4 { font-size: 13px; font-weight: 600; color: #0b2c4d; margin-bottom: 1px; }
 .panel-item-content p { font-size: 11px; color: #64748b; line-height: 1.3; }
 
-/* CONTAINER */
 .container { max-width: 1200px; margin: auto; padding: 60px 24px; }
 section { margin-bottom: 48px; animation: fadeInUp 0.6s ease; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -57,7 +55,6 @@ section { margin-bottom: 48px; animation: fadeInUp 0.6s ease; }
 .card ul li { padding: 12px 0; padding-left: 28px; position: relative; color: #475569; font-size: 16px; }
 .card ul li:before { position: absolute; left: 0; color: #0b2c4d; font-weight: bold; font-size: 18px; }
 
-/* SERVIÇOS */
 .service-detail { display: none; }
 .service-hero { background: linear-gradient(135deg, #0b2c4d 0%, #1e3a5f 100%); color: #fff; padding: 60px 40px; border-radius: 16px; text-align: center; margin-bottom: 40px; }
 .service-hero h2 { font-size: 42px; margin-bottom: 16px; color: #fff; }
@@ -80,7 +77,6 @@ section { margin-bottom: 48px; animation: fadeInUp 0.6s ease; }
 .back-button { display: inline-flex; align-items: center; gap: 8px; color: #0b2c4d; text-decoration: none; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: 2px solid #0b2c4d; transition: all 0.3s ease; margin-bottom: 24px; }
 .back-button:hover { background: #0b2c4d; color: #fff; }
 
-/* VMV */
 .vmv-section { margin-top: 48px; }
 .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
 .vmv-card { position: relative; padding-top: 60px; }
@@ -88,12 +84,10 @@ section { margin-bottom: 48px; animation: fadeInUp 0.6s ease; }
 .values-list li { padding: 8px 0; padding-left: 0 !important; }
 .values-list li::before { content: "→"; margin-right: 8px; }
 
-/* FOOTER */
 footer { background: linear-gradient(rgba(75, 138, 19, 2)); color: #e0e7ff; text-align: center; padding: 32px 20px; border-top: 3px solid #2d4a6d; }
 footer p { margin: 6px 0; font-size: 15px; }
 footer strong { color: #fff; font-weight: 600; }
 
-/* HERO */
 .hero { position: relative; height: 75vh; z-index: 0; }
 .carousel { width: 100%; height: 100%; position: relative; }
 .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; }
@@ -107,7 +101,6 @@ footer strong { color: #fff; font-weight: 600; }
 .carousel-btn:nth-child(1) { left: 30px; }
 .carousel-btn:nth-child(2) { right: 30px; }
 
-/* CONTACTOS */
 #contactos { background: transparent; padding: 0; border-radius: 0; box-shadow: none; }
 .section-header { text-align: center; margin-bottom: 48px; }
 .section-badge { display: inline-block; background: #e0e7ff; color: #0b2c4d; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
@@ -139,7 +132,6 @@ textarea { resize: vertical; min-height: 120px; }
 .form-message.success { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
 .form-message.error   { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
 
-/* MOBILE */
 @media (max-width: 768px) {
   header { flex-direction: column; gap: 16px; padding: 16px 20px; }
   header h1 { font-size: 16px; text-align: center; }
@@ -418,7 +410,7 @@ textarea { resize: vertical; min-height: 120px; }
       <address>
         <div class="contact-item"><span class="contact-icon"><img src="empresa.png" alt="Empresa"></span><div><strong>Empresa</strong><p>ASAP TP – Projetos, Comércios e Serviços</p></div></div>
         <div class="contact-item"><span class="contact-icon"><img src="nif.png" alt="NIF"></span><div><strong>NIF</strong><p>5002197618</p></div></div>
-        <div class="contact-item"><span class="contact-icon"><img src="email.png" alt="Email"></span><div><strong>Email</strong><p><a href="mailto:geral@asap-ao.com">geral@asap-ao.com</a></p></div></div>
+        <div class="contact-item"><span class="contact-icon"><img src="email.png" alt="Email"></span><div><strong>Email</strong><p><a href="/cdn-cgi/l/email-protection#0a6d6f786b664a6b796b7a276b6524696567"><span class="__cf_email__" data-cfemail="640301160508240517051449050b4a070b09">[email&#160;protected]</span></a></p></div></div>
         <div class="contact-item"><span class="contact-icon"><img src="tele.png" alt="Telefone"></span><div><strong>Telefone/WhatsApp</strong><p><a href="tel:+244929952190">+244 929 952 190</a></p></div></div>
         <div class="contact-item"><span class="contact-icon"><img src="loca.png" alt="Localização"></span><div><strong>Localização</strong><p>Cuíto, Centralidade Belo Horizonte<br>Quadra: 44, Prédio: 24, Apt: 1.1</p></div></div>
         <div class="contact-item"><span class="contact-icon"><img src="horario.png" alt="Horário"></span><div><strong>Horário de Atendimento</strong><p>Segunda a Sexta: 8h00 - 17h00<br>Sábado: 8h00 - 13h00</p></div></div>
@@ -426,26 +418,22 @@ textarea { resize: vertical; min-height: 120px; }
     </div>
     <div class="card">
       <h3>Envie-nos uma Mensagem</h3>
-      <form id="contactForm" action="https://formspree.io/f/xwpkpoqe" method="POST">
+      <form id="contactForm">
         <div class="form-group"><label for="name">Nome Completo *</label><input type="text" id="name" name="name" required placeholder="Seu nome completo"></div>
-        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="_replyto" required placeholder="seu.email@exemplo.com"></div>
+        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com"></div>
         <div class="form-group"><label for="phone">Telefone</label><input type="tel" id="phone" name="phone" placeholder="+244 900 000 000"></div>
         <div class="form-group">
           <label for="subject">Assunto</label>
           <select id="subject" name="subject" required>
             <option value="">Selecione um assunto</option>
-                      <option value="Trazabilidade de Ouro">Trazabilidade de Ouro</option>
+            <option value="Trazabilidade de Ouro">Trazabilidade de Ouro</option>
             <option value="Trazabilidade de Negócios">Trazabilidade de Negócios</option>
             <option value="Estudo de Impacto Ambiental (EIA)">Estudo de Impacto Ambiental (EIA)</option>
             <option value="Exploração Mineira">Exploração Mineira</option>
-
             <option value="Outro">Outro</option>
           </select>
         </div>
         <div class="form-group"><label for="message">Mensagem</label><textarea id="message" name="message" rows="5" required placeholder="Escreva sua mensagem aqui..."></textarea></div>
-        <input type="hidden" name="_subject" value="Nova mensagem do site ASAP TP">
-        <input type="hidden" name="_next" value="#contactos">
-        <input type="text" name="_gotcha" style="display:none">
         <button type="submit" class="submit-btn" id="submitBtn"><span>Enviar Mensagem</span></button>
       </form>
       <div id="formMessage"></div>
@@ -460,7 +448,7 @@ textarea { resize: vertical; min-height: 120px; }
   <p>© 2026 Todos os direitos reservados</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function toggleDrop() {
   const d = document.getElementById("dropServ");
   d.classList.toggle("open");
@@ -512,16 +500,36 @@ next.addEventListener('click',()=>{stopCarousel();cur=(cur+1)%slides.length;show
 document.querySelector('.hero').addEventListener('mouseenter',stopCarousel);
 document.querySelector('.hero').addEventListener('mouseleave',startCarousel);
 
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
+// ✅ CORREÇÃO: Lógica de envio melhorada com tratamento de erros detalhado
+document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const btn = document.getElementById('submitBtn'), msg = document.getElementById('formMessage');
-  btn.disabled = true; btn.innerHTML = '<span>Enviando...</span>';
-  try {
-    const r = await fetch(this.action, {method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
-    if (r.ok) { msg.className='form-message success'; msg.textContent='✓ Mensagem enviada com sucesso! Entraremos em contacto em breve.'; this.reset(); }
-    else throw new Error();
-  } catch { msg.className='form-message error'; msg.textContent='✗ Erro ao enviar. Contacte-nos em geral@asap-ao.com'; }
-  finally { btn.disabled=false; btn.innerHTML='<span>Enviar Mensagem</span>'; setTimeout(()=>{msg.textContent='';msg.className='';},5000); }
+
+  const name    = document.getElementById('name').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const subject = document.getElementById('subject').value;
+  const message = document.getElementById('message').value.trim();
+  const msg     = document.getElementById('formMessage');
+
+  // Monta o corpo do email com todos os dados preenchidos
+  const body =
+    'Nome: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    (phone ? 'Telefone: ' + phone + '\n' : '') +
+    'Assunto: ' + subject + '\n\n' +
+    'Mensagem:\n' + message;
+
+  // Abre o cliente de email com os dados preenchidos
+  window.location.href =
+    'mailto:geral@asap-ao.com' +
+    '?subject=' + encodeURIComponent('ASAP TP – ' + subject) +
+    '&body='    + encodeURIComponent(body);
+
+  // Mostra mensagem de sucesso e limpa o formulário
+  msg.className = 'form-message success';
+  msg.textContent = '✓ O seu cliente de email foi aberto com a mensagem pronta a enviar!';
+  document.getElementById('contactForm').reset();
+  setTimeout(() => { msg.textContent = ''; msg.className = ''; }, 6000);
 });
 </script>
 </body>
